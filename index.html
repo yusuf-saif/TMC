@@ -6,624 +6,606 @@
 <title>The Muhsinat Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&amp;family=Dancing+Script:wght@400&amp;family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300&amp;display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal:      #1A6B72;
-  --teal-dk:   #0D3F44;
-  --teal-md:   #2A8A93;
-  --teal-lt:   #E4F2F3;
-  --gold:      #C8A84B;
-  --gold-lt:   #E8CB7A;
+  --teal: #1A6B72;
+  --teal-dk: #0D3F44;
+  --teal-hero: #0A3035;
+  --teal-md: #2A8A93;
+  --teal-lt: #E4F2F3;
+  --gold: #C8A84B;
+  --gold-lt: #E8CB7A;
   --gold-pale: #FDF6E3;
-  --ivory:     #FAF8F3;
-  --ink:       #1C1A17;
-  --ink-md:    #3D3A35;
-  --ink-soft:  #6B6760;
-  --white:     #FFFFFF;
-  --display:   'Dancing Script', cursive;
-  --body:      'Nunito', sans-serif;
+  --ivory: #FAF8F3;
+  --ink: #1C1A17;
+  --ink-mid: #3D3A35;
+  --ink-soft: #6B6760;
+  --white: #FFFFFF;
+  --display: 'Dancing Script', cursive;
+  --body: 'Nunito', sans-serif;
+  --arabic: 'Amiri', serif;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--body);background:var(--ivory);color:var(--ink);overflow-x:hidden;cursor:none}
 
-/* ── CURSOR ─────────────────────────────────────────── */
-#cur-dot{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,background .2s,width .2s,height .2s}
-#cur-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(200,168,75,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s cubic-bezier(.25,.46,.45,.94),width .3s,height .3s,opacity .3s}
-body:hover #cur-ring{opacity:1}
-a:hover~#cur-dot,button:hover~#cur-dot{width:12px;height:12px}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--ivory); color: var(--ink); font-family: var(--body); overflow-x: hidden; }
+a, button { color: inherit; }
+button, a { cursor: pointer; }
+.ar { direction: rtl; font-family: var(--arabic); unicode-bidi: embed; }
 
-/* ── SCROLL PROGRESS ─────────────────────────────────── */
-#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-lt));z-index:200;width:0%;transition:width .1s linear}
+@media (hover: hover) and (pointer: fine) {
+  body, a, button { cursor: none; }
+}
 
-/* ── ARABESQUE PATTERN ───────────────────────────────── */
-.ara{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%231A6B72' stroke-width='.4' opacity='.13'%3E%3Cpath d='M40 2L78 40 40 78 2 40Z'/%3E%3Ccircle cx='40' cy='40' r='22'/%3E%3Cpath d='M40 18L62 40 40 62 18 40Z'/%3E%3Cpath d='M20 2L40 22M60 2L40 22M78 20L58 40M78 60L58 40M60 78L40 58M20 78L40 58M2 60L22 40M2 20L22 40'/%3E%3C/g%3E%3C/svg%3E")}
-.ara-gold{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg fill='none' stroke='%23C8A84B' stroke-width='.5' opacity='.16'%3E%3Cpath d='M50 4L96 50 50 96 4 50Z'/%3E%3Ccircle cx='50' cy='50' r='28'/%3E%3Cpath d='M50 22L78 50 50 78 22 50Z'/%3E%3Cpath d='M26 4L50 28M74 4L50 28M96 26L72 50M96 74L72 50M74 96L50 72M26 96L50 72M4 74L28 50M4 26L28 50'/%3E%3C/g%3E%3C/svg%3E")}
+.progress { background: linear-gradient(90deg, var(--gold), var(--gold-lt)); height: 2px; left: 0; position: fixed; top: 0; width: 0; z-index: 300; }
+.cursor-dot, .cursor-ring { display: none; pointer-events: none; position: fixed; transform: translate(-50%, -50%); }
+.cursor-dot { background: var(--gold); border-radius: 50%; height: 8px; width: 8px; z-index: 9999; }
+.cursor-ring { border: .5px solid rgba(200,168,75,.78); border-radius: 50%; height: 32px; transition: height .22s ease, width .22s ease; width: 32px; z-index: 9998; }
+@media (hover: hover) and (pointer: fine) {
+  .cursor-dot, .cursor-ring { display: block; }
+}
 
-/* ── NAV ─────────────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 5rem;transition:all .5s cubic-bezier(.25,.46,.45,.94)}
-nav.s{background:rgba(250,248,243,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,168,75,.18);padding:1rem 5rem;box-shadow:0 4px 30px rgba(0,0,0,.04)}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;opacity:0;animation:fadeD .8s .2s forwards}
-.logo-mark{width:38px;height:38px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:17px;color:var(--gold-lt);letter-spacing:.5px;transition:transform .3s}
-.logo:hover .logo-mark{transform:rotate(15deg) scale(1.05)}
-.logo-name{font-family:var(--display);font-size:18px;color:var(--teal-dk);transition:color .2s}
-nav.s .logo-name{color:var(--teal-dk)}
-.nav-r{display:flex;align-items:center;gap:2.5rem;opacity:0;animation:fadeD .8s .4s forwards}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{font-size:12.5px;font-weight:400;letter-spacing:.9px;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s;position:relative}
-nav.s .nav-links a{color:var(--ink-md)}
-.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
-.nav-links a:hover::after{width:100%}
-.nav-links a:hover{color:var(--gold)}
-nav.s .nav-links a:hover{color:var(--teal)}
-.nav-btn{background:var(--gold);color:var(--teal-dk);font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:10px 24px;border-radius:2px;text-decoration:none;transition:all .25s;border:none;cursor:none}
-.nav-btn:hover{background:var(--gold-lt);transform:translateY(-1px)}
+.btn { align-items: center; border-radius: 4px; display: inline-flex; font-family: var(--body); font-size: 12px; font-weight: 600; justify-content: center; letter-spacing: .9px; min-height: 46px; overflow: hidden; padding: 0 28px; position: relative; text-decoration: none; text-transform: uppercase; transition: border-color .28s ease, box-shadow .28s ease, color .28s ease, transform .28s ease, background .28s ease; }
+.btn::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent); content: ''; inset: 0; position: absolute; transform: translateX(-105%); transition: transform .55s ease; }
+.btn:hover::after { transform: translateX(105%); }
+.btn:hover { transform: translateY(-2px); }
+.btn-gold { background: var(--gold); border: 1px solid var(--gold); color: var(--teal-hero); }
+.btn-gold:hover { background: var(--gold-lt); box-shadow: 0 18px 42px rgba(200,168,75,.25); }
+.btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,.48); color: rgba(255,255,255,.86); }
+.btn-ghost:hover { border-color: rgba(255,255,255,.9); color: var(--white); }
+.btn-outline { background: transparent; border: 1px solid var(--teal); color: var(--teal); }
+.btn-outline:hover { background: var(--teal); color: var(--white); }
 
-/* ── HERO ────────────────────────────────────────────── */
-.hero{min-height:100vh;background:linear-gradient(150deg,#0A3035 0%,#0F4449 40%,#1A6B72 100%);position:relative;overflow:hidden;display:flex;align-items:center}
-.hero-ara{position:absolute;inset:0;pointer-events:none}
-.hero-ara::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg fill='none' stroke='%23C8A84B' stroke-width='.5' opacity='.14'%3E%3Cpath d='M50 4L96 50 50 96 4 50Z'/%3E%3Ccircle cx='50' cy='50' r='28'/%3E%3Cpath d='M50 22L78 50 50 78 22 50Z'/%3E%3C/g%3E%3C/svg%3E");animation:araShift 25s linear infinite}
-@keyframes araShift{0%{background-position:0 0}100%{background-position:100px 100px}}
-.orb{position:absolute;border-radius:50%;pointer-events:none}
-.orb-1{width:700px;height:700px;background:radial-gradient(ellipse,rgba(200,168,75,.13) 0%,transparent 68%);top:-200px;right:-200px;animation:orbPulse 8s ease-in-out infinite}
-.orb-2{width:500px;height:500px;background:radial-gradient(ellipse,rgba(42,138,147,.2) 0%,transparent 68%);bottom:-100px;left:0;animation:orbPulse 10s ease-in-out infinite reverse}
-@keyframes orbPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-.hero-inner{position:relative;z-index:2;max-width:1260px;margin:0 auto;padding:0 5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding-top:90px;width:100%}
-.hero-l .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,168,75,.13);border:1px solid rgba(200,168,75,.32);border-radius:100px;padding:6px 18px;font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-lt);margin-bottom:1.6rem;opacity:0;animation:slideUp .7s .5s forwards}
-.pulse-dot{width:6px;height:6px;background:var(--gold-lt);border-radius:50%;animation:pdot 2s ease-in-out infinite}
-@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
-.hero-h1{font-family:var(--display);font-size:clamp(3.5rem,5.5vw,5.8rem);font-weight:400;line-height:1.1;color:var(--white);margin-bottom:.5rem}
-.hero-h1 .w1{display:block;opacity:0;animation:slideUp .7s .7s forwards}
-.hero-h1 .w2{display:block;color:var(--gold-lt);opacity:0;animation:slideUp .7s .85s forwards}
-.hero-h1 .w3{display:block;opacity:0;animation:slideUp .7s 1s forwards}
-.hero-tag{font-family:var(--display);font-size:1.15rem;color:rgba(255,255,255,.55);margin-bottom:1.6rem;opacity:0;animation:slideUp .7s 1.1s forwards;font-style:italic}
-.hero-body{font-size:.92rem;font-weight:300;line-height:1.85;color:rgba(255,255,255,.65);max-width:460px;margin-bottom:2.4rem;opacity:0;animation:slideUp .7s 1.2s forwards}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:slideUp .7s 1.35s forwards}
-.btn-gold{background:var(--gold);color:var(--teal-dk);font-size:12.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:14px 32px;border-radius:2px;text-decoration:none;transition:all .3s;position:relative;overflow:hidden;cursor:none;border:none}
-.btn-gold::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);transform:translateX(-100%);transition:transform .5s}
-.btn-gold:hover::after{transform:translateX(100%)}
-.btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 12px 30px rgba(200,168,75,.3)}
-.btn-ghost{background:transparent;color:rgba(255,255,255,.75);font-size:12.5px;font-weight:400;letter-spacing:.8px;text-transform:uppercase;padding:13px 28px;border-radius:2px;text-decoration:none;border:1px solid rgba(255,255,255,.28);transition:all .3s;cursor:none}
-.btn-ghost:hover{border-color:rgba(255,255,255,.7);color:var(--white);transform:translateY(-2px)}
-.hero-proof{display:flex;align-items:center;gap:12px;margin-top:2rem;opacity:0;animation:slideUp .7s 1.5s forwards}
-.avatars{display:flex}
-.av{width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,255,255,.25);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:13px;color:white}
-.av:first-child{margin-left:0}
-.av1{background:#2A7A82}.av2{background:#3A6B5A}.av3{background:#6B4A3A}.av4{background:#4A3A6B}
-.proof-txt{font-size:12.5px;color:rgba(255,255,255,.55);font-weight:300}
-.proof-txt strong{color:rgba(255,255,255,.85);font-weight:500}
+.site-nav { align-items: center; display: flex; justify-content: space-between; left: 0; padding: 1.25rem clamp(1.25rem, 5vw, 5rem); position: fixed; right: 0; top: 0; transition: background .35s ease, border .35s ease, padding .35s ease, backdrop-filter .35s ease; z-index: 200; }
+.site-nav.scrolled { backdrop-filter: blur(14px); background: rgba(250,248,243,.92); border-bottom: 1px solid rgba(200,168,75,.55); padding-block: .85rem; }
+.brand { align-items: center; display: flex; gap: .75rem; text-decoration: none; }
+.logo-mark { align-items: center; background: var(--teal); border: 1px solid rgba(200,168,75,.32); border-radius: 50%; color: var(--gold-lt); display: flex; font-size: 1.1rem; height: 40px; justify-content: center; line-height: 1; width: 40px; }
+.brand-name { color: var(--white); font-family: var(--display); font-size: 1.35rem; transition: color .35s ease; }
+.site-nav.scrolled .brand-name { color: var(--teal-dk); }
+.nav-right { align-items: center; display: flex; gap: 2.25rem; }
+.nav-links { display: flex; gap: 2.1rem; list-style: none; }
+.nav-links a { color: rgba(255,255,255,.76); font-size: 12px; font-weight: 600; letter-spacing: 1.3px; position: relative; text-decoration: none; text-transform: uppercase; transition: color .2s ease; }
+.site-nav.scrolled .nav-links a { color: var(--ink-mid); }
+.nav-links a::after { background: var(--gold); bottom: -5px; content: ''; height: 1px; left: 0; position: absolute; transform: scaleX(0); transform-origin: left; transition: transform .26s ease; width: 100%; }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { border-radius: 4px; min-height: 40px; padding-inline: 22px; }
 
-/* ── PHONE ───────────────────────────────────────────── */
-.hero-r{display:flex;justify-content:center;align-items:center;position:relative;opacity:0;animation:fadeD .9s 1.2s forwards}
-.phone{width:255px;height:520px;background:rgba(10,48,53,.75);border:1.5px solid rgba(200,168,75,.35);border-radius:42px;position:relative;overflow:hidden;backdrop-filter:blur(24px);box-shadow:0 50px 100px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);animation:phoneFloat 7s ease-in-out infinite}
-@keyframes phoneFloat{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-14px) rotate(2deg)}}
-.notch{width:72px;height:20px;background:rgba(6,32,36,.9);border-radius:0 0 14px 14px;margin:0 auto;position:relative;z-index:3}
-.p-screen{padding:10px 12px;height:calc(100% - 20px);display:flex;flex-direction:column;gap:9px}
-.p-time{font-size:8.5px;color:rgba(255,255,255,.4);display:flex;justify-content:space-between;padding:0 3px}
-.p-greet{background:rgba(200,168,75,.1);border:1px solid rgba(200,168,75,.22);border-radius:12px;padding:11px 13px}
-.p-greet-lbl{font-size:7px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:3px}
-.p-greet-val{font-family:var(--display);font-size:14px;color:var(--gold-lt)}
-.p-card{background:rgba(255,255,255,.06);border-radius:11px;padding:9px 12px;border:1px solid rgba(255,255,255,.07)}
-.p-lbl{font-size:7px;letter-spacing:.9px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px}
-.p-ttl{font-family:var(--display);font-size:12px;color:rgba(255,255,255,.88);margin-bottom:7px}
-.p-bar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
-.p-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));border-radius:2px;width:0%;animation:barGrow 2s 2s forwards}
-@keyframes barGrow{to{width:65%}}
-.p-coins{display:flex;align-items:center;gap:9px;background:rgba(200,168,75,.07);border:1px solid rgba(200,168,75,.18);border-radius:10px;padding:8px 12px}
-.coin-ic{width:22px;height:22px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
-.coin-n{font-size:7.5px;color:rgba(255,255,255,.4)}
-.coin-v{font-family:var(--display);font-size:15px;color:var(--gold-lt);line-height:1.2;animation:countUp 1.5s 2.5s both}
-@keyframes countUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.p-nav-bar{position:absolute;bottom:0;left:0;right:0;background:rgba(6,32,36,.95);border-top:1px solid rgba(255,255,255,.06);border-radius:0 0 40px 40px;padding:9px 0 6px;display:flex;justify-content:space-around}
-.p-nav-dot{width:18px;height:3px;border-radius:2px;background:rgba(255,255,255,.2)}
-.p-nav-dot.a{background:var(--gold);width:22px}
-.pill-1{position:absolute;top:55px;right:-20px;background:var(--gold);color:var(--teal-dk);font-size:9px;font-weight:700;padding:5px 12px;border-radius:100px;white-space:nowrap;box-shadow:0 6px 18px rgba(200,168,75,.45);animation:pillPop .5s 2.8s both}
-.pill-2{position:absolute;bottom:110px;left:-22px;background:rgba(10,50,58,.95);border:1px solid rgba(200,168,75,.3);color:var(--gold-lt);font-size:8.5px;font-weight:400;padding:5px 12px;border-radius:100px;white-space:nowrap;backdrop-filter:blur(8px);animation:pillPop .5s 3s both}
-@keyframes pillPop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:5}
-.sc-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent);margin:0 auto;animation:scLine 2.5s ease-in-out infinite}
-@keyframes scLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.pattern-gold, .pattern-teal { position: relative; }
+.pattern-gold::before, .pattern-teal::before { background-position: 0 0; content: ''; inset: 0; pointer-events: none; position: absolute; }
+.pattern-gold::before { animation: patternDrift 25s linear infinite; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23C8A84B' stroke-width='1' opacity='.14'%3E%3Cpath d='M60 8 112 60 60 112 8 60Z'/%3E%3Ccircle cx='60' cy='60' r='31'/%3E%3Cpath d='M60 29 91 60 60 91 29 60Z'/%3E%3Cpath d='M31 9 60 38 89 9M111 31 82 60 111 89M89 111 60 82 31 111M9 89 38 60 9 31'/%3E%3C/g%3E%3C/svg%3E"); }
+.pattern-teal::before { animation: patternDrift 25s linear infinite; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Cg fill='none' stroke='%231A6B72' stroke-width='1' opacity='.07'%3E%3Cpath d='M56 7 105 56 56 105 7 56Z'/%3E%3Ccircle cx='56' cy='56' r='29'/%3E%3Cpath d='M56 27 85 56 56 85 27 56Z'/%3E%3Cpath d='M28 7 56 35 84 7M105 28 77 56 105 84M84 105 56 77 28 105M7 84 35 56 7 28'/%3E%3C/g%3E%3C/svg%3E"); }
+@keyframes patternDrift { to { background-position: 120px 120px; } }
 
-/* ── BAND ────────────────────────────────────────────── */
-.band{background:var(--gold);padding:13px 0;overflow:hidden;position:relative}
-.band::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 50%,transparent 100%);animation:shimmer 3s ease-in-out infinite}
-@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.band-track{display:flex;gap:2.5rem;animation:scroll 22s linear infinite;width:max-content}
-.band-item{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.6px;color:var(--teal-dk);white-space:nowrap}
-.band-sep{opacity:.35;font-size:9px}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero { display: grid; grid-template-columns: 60% 40%; min-height: 100vh; overflow: hidden; }
+.hero-left { align-items: center; background: var(--teal-hero); display: flex; min-height: 100vh; overflow: hidden; padding: 8rem clamp(1.5rem, 6vw, 6rem) 4.5rem; position: relative; }
+.hero-left::after { animation: orbPulse 8s ease-in-out infinite; background: radial-gradient(circle, rgba(200,168,75,.18), transparent 64%); border-radius: 50%; bottom: -18rem; content: ''; height: 34rem; left: -10rem; position: absolute; width: 34rem; }
+.bismillah { color: rgba(200,168,75,.06); font-size: clamp(6rem, 12vw, 11rem); left: 50%; line-height: 1; pointer-events: none; position: absolute; text-align: center; top: 45%; transform: translate(-50%, -50%); white-space: nowrap; z-index: 1; }
+.hero-copy { max-width: 620px; position: relative; z-index: 2; }
+.hero-title { color: var(--white); font-family: var(--display); font-size: clamp(4.2rem, 8vw, 5.8rem); font-weight: 400; line-height: .96; margin-bottom: 1.25rem; }
+.hero-title span { display: block; opacity: 0; transform: translateY(24px); }
+.hero-title span:nth-child(1) { animation: slideUp .75s .2s ease forwards; }
+.hero-title span:nth-child(2) { animation: slideUp .75s .4s ease forwards; color: var(--gold); }
+.hero-title span:nth-child(3) { animation: slideUp .75s .6s ease forwards; }
+.hero-tagline { animation: slideUp .75s .8s ease forwards; color: rgba(255,255,255,.55); font-family: var(--display); font-size: 1.1rem; font-style: italic; margin-bottom: 1.25rem; opacity: 0; transform: translateY(24px); }
+.hero-body { animation: slideUp .75s 1s ease forwards; color: rgba(255,255,255,.65); font-size: .92rem; font-weight: 300; line-height: 1.85; margin-bottom: 2rem; max-width: 420px; opacity: 0; transform: translateY(24px); }
+.hero-actions { animation: slideUp .75s 1.2s ease forwards; display: flex; flex-wrap: wrap; gap: .9rem; opacity: 0; transform: translateY(24px); }
+.hero-proof { align-items: center; animation: slideUp .75s 1.4s ease forwards; bottom: 3rem; display: flex; gap: .95rem; left: clamp(1.5rem, 6vw, 6rem); opacity: 0; position: absolute; transform: translateY(24px); z-index: 2; }
+.avatars { display: flex; }
+.avatar { align-items: center; border: 2px solid rgba(255,255,255,.28); border-radius: 50%; color: var(--white); display: flex; font-family: var(--display); height: 34px; justify-content: center; margin-left: -8px; width: 34px; }
+.avatar:first-child { margin-left: 0; }
+.avatar:nth-child(1) { background: #1A6B72; }
+.avatar:nth-child(2) { background: #557866; }
+.avatar:nth-child(3) { background: #9A7D38; }
+.avatar:nth-child(4) { background: #0D3F44; }
+.proof-text { color: rgba(255,255,255,.58); font-size: 12.5px; font-weight: 300; }
+.hero-right { align-items: center; animation: fadeIn .9s .9s ease forwards; background: var(--ivory); display: flex; justify-content: center; min-height: 100vh; opacity: 0; overflow: hidden; padding: 8rem 2rem 3rem; position: relative; }
+.hero-right::before { opacity: .86; }
+.calligraphy-panel { align-items: center; display: flex; flex-direction: column; min-height: 68vh; position: relative; text-align: center; width: min(100%, 480px); z-index: 2; }
+.rule { background: var(--gold); height: 1px; opacity: .65; width: 60px; }
+.hero-arabic-word { color: rgba(26,107,114,.9); font-size: clamp(4.5rem, 10vw, 8rem); font-weight: 700; line-height: 1; margin: 1rem 0 .65rem; }
+.translation { color: var(--teal-md); font-family: var(--display); font-size: 1.1rem; font-style: italic; margin: .85rem 0 1rem; }
+.star { color: var(--gold); height: 28px; margin-bottom: auto; width: 28px; }
+.right-stats { align-items: center; bottom: 2.3rem; display: flex; gap: 2.25rem; justify-content: center; position: absolute; width: 100%; }
+.right-stat strong { color: var(--gold); display: block; font-family: var(--display); font-size: 3rem; font-weight: 400; line-height: .9; }
+.right-stat span { color: rgba(28,26,23,.72); display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.3px; margin-top: .35rem; text-transform: uppercase; }
+@keyframes orbPulse { 50% { transform: scale(1.08); } }
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { to { opacity: 1; } }
 
-/* ── STATS ───────────────────────────────────────────── */
-.stats{background:var(--teal-dk);padding:4rem 5rem;display:flex;justify-content:center;gap:0}
-.stat{flex:1;max-width:220px;text-align:center;padding:2rem;position:relative}
-.stat+.stat::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:rgba(200,168,75,.2)}
-.stat-n{font-family:var(--display);font-size:3.5rem;color:var(--gold-lt);line-height:1}
-.stat-l{font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:.5rem;font-weight:400}
+.band { background: var(--gold); overflow: hidden; padding: 13px 0; position: relative; }
+.band::after { animation: shimmer 3s ease-in-out infinite; background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); content: ''; inset: 0; position: absolute; transform: translateX(-100%); }
+.band-track { animation: marquee 24s linear infinite; display: flex; gap: 2.2rem; position: relative; width: max-content; z-index: 1; }
+.band-item { color: var(--teal-dk); font-size: 12.5px; font-weight: 600; letter-spacing: .6px; white-space: nowrap; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes shimmer { to { transform: translateX(100%); } }
 
-/* ── SECTION SHARED ──────────────────────────────────── */
-.sec{padding:8rem 5rem;position:relative}
-.sec-inner{max-width:1200px;margin:0 auto}
-.label{font-size:11px;font-weight:500;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
-.sh{font-family:var(--display);font-size:clamp(2.4rem,3.5vw,4rem);font-weight:400;line-height:1.15;color:var(--ink);margin-bottom:1rem}
-.sh em,.sh-w em{color:var(--teal);font-style:italic}
-.sh-w{font-family:var(--display);font-size:clamp(2.4rem,3.5vw,4rem);font-weight:400;line-height:1.15;color:white;margin-bottom:1rem}
-.sh-w em{color:var(--gold-lt)}
-.sd{font-size:.92rem;font-weight:300;line-height:1.85;color:var(--ink-soft);max-width:500px;margin-bottom:3.5rem}
+.stats-bar { background: var(--teal-dk); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 4rem clamp(1.5rem, 5vw, 5rem); }
+.stat { padding: 1.25rem; position: relative; text-align: center; }
+.stat + .stat { border-left: 1px solid rgba(200,168,75,.28); }
+.stat-number { color: var(--gold-lt); font-family: var(--display); font-size: 3.5rem; line-height: 1; }
+.stat-label { color: rgba(255,255,255,.45); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; margin-top: .55rem; text-transform: uppercase; }
 
-/* ── FEATURES ────────────────────────────────────────── */
-.feat-sec{background:var(--ivory);overflow:hidden}
-.feat-sec::before{content:'';position:absolute;inset:0;pointer-events:none}
-.feat-sec.ara{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%231A6B72' stroke-width='.4' opacity='.07'%3E%3Cpath d='M40 2L78 40 40 78 2 40Z'/%3E%3Ccircle cx='40' cy='40' r='22'/%3E%3C/g%3E%3C/svg%3E")}
-.f-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(200,168,75,.14);border:1.5px solid rgba(200,168,75,.14)}
-.fc{background:var(--ivory);padding:2.5rem;transition:background .35s,transform .35s;position:relative;overflow:hidden}
-.fc::before{content:'';position:absolute;left:0;top:0;width:3px;height:0;background:var(--gold);transition:height .4s cubic-bezier(.25,.46,.45,.94)}
-.fc:hover::before{height:100%}
-.fc:hover{background:var(--teal-lt)}
-.fc.wide{grid-column:span 2}
-.fc-icon{width:44px;height:44px;background:var(--teal-lt);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;transition:background .35s,transform .35s}
-.fc:hover .fc-icon{background:white;transform:scale(1.08) rotate(-3deg)}
-.fc-icon svg{width:21px;height:21px;stroke:var(--teal);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.fc-t{font-family:var(--display);font-size:1.55rem;color:var(--ink);margin-bottom:.6rem;font-weight:500}
-.fc-d{font-size:.875rem;font-weight:300;line-height:1.85;color:var(--ink-soft)}
-.fc-tag{display:inline-block;margin-top:.9rem;font-size:10.5px;letter-spacing:.9px;text-transform:uppercase;color:var(--teal);font-weight:600;padding-bottom:2px;border-bottom:1px solid var(--teal);transition:letter-spacing .3s}
-.fc:hover .fc-tag{letter-spacing:1.4px}
+.section { padding: 8rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.section-inner { margin: 0 auto; max-width: 1200px; position: relative; z-index: 2; }
+.eyebrow { color: var(--gold); display: block; font-size: 11px; font-weight: 600; letter-spacing: 2.4px; margin-bottom: .95rem; text-transform: uppercase; }
+.section-heading { color: var(--ink); font-family: var(--display); font-size: clamp(2.8rem, 5vw, 4.4rem); font-weight: 400; line-height: 1.06; }
+.section-heading em { color: var(--teal); font-style: italic; }
+.section-heading.light { color: var(--white); }
+.section-heading.light em { color: var(--gold); }
+.fade-up { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
-/* ── HOW ─────────────────────────────────────────────── */
-.how-sec{background:var(--teal-dk);overflow:hidden}
-.how-sec::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23C8A84B' stroke-width='.4' opacity='.09'%3E%3Cpath d='M40 2L78 40 40 78 2 40Z'/%3E%3Ccircle cx='40' cy='40' r='22'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;margin-top:4rem;position:relative;z-index:2}
-.step{opacity:0;transform:translateY(28px);transition:opacity .65s,transform .65s}
-.step.vis{opacity:1;transform:none}
-.step-n{font-family:var(--display);font-size:5.5rem;color:rgba(200,168,75,.18);line-height:1;margin-bottom:.8rem}
-.step-line{height:1px;background:rgba(200,168,75,.2);margin:.8rem 0 1rem;position:relative;overflow:hidden}
-.step.vis .step-line::after{animation:lineDraw .8s ease forwards}
-.step-line::after{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:rgba(200,168,75,.5)}
-@keyframes lineDraw{to{width:60%}}
-.step-t{font-family:var(--display);font-size:1.65rem;color:white;margin-bottom:.7rem;font-weight:400}
-.step-d{font-size:.875rem;font-weight:300;line-height:1.85;color:rgba(255,255,255,.55)}
+.features { background: var(--ivory); overflow: hidden; }
+.features-grid { background: rgba(200,168,75,.55); display: grid; gap: 1.5px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 3.5rem; }
+.feature-card { background: var(--ivory); min-height: 286px; opacity: 0; overflow: hidden; padding: 2.45rem; position: relative; transform: translateY(22px); transition: background .35s ease, opacity .6s ease, transform .6s ease; }
+.feature-card.visible { opacity: 1; transform: translateY(0); }
+.feature-card.wide { grid-column: span 2; }
+.feature-card::before { background: var(--gold); bottom: 0; content: ''; height: 0; left: 0; position: absolute; transition: height .4s cubic-bezier(.25,.46,.45,.94); width: 3px; }
+.feature-card:hover::before { height: 100%; }
+.feature-card:hover { background: var(--teal-lt); }
+.feature-icon { align-items: center; border: 1px solid rgba(26,107,114,.32); border-radius: 2px; display: flex; height: 44px; justify-content: center; margin-bottom: 1.3rem; width: 44px; }
+.feature-icon svg { fill: none; height: 22px; stroke: var(--teal); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; width: 22px; }
+.feature-title { color: var(--ink); font-family: var(--display); font-size: 1.55rem; font-weight: 400; margin-bottom: .65rem; }
+.feature-body { color: var(--ink-soft); font-size: .875rem; font-weight: 300; line-height: 1.85; max-width: 560px; }
+.feature-tag { border-bottom: 1px solid currentColor; color: var(--teal); display: inline-block; font-size: 10.5px; font-weight: 600; letter-spacing: .9px; margin-top: 1rem; padding-bottom: 2px; text-transform: uppercase; transition: letter-spacing .28s ease; }
+.feature-card:hover .feature-tag { letter-spacing: 1.55px; }
 
-/* ── TESTIMONIALS ────────────────────────────────────── */
-.testi-sec{background:white}
-.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
-.tc{background:var(--ivory);border:1px solid rgba(200,168,75,.14);border-radius:3px;padding:2rem 2rem 1.7rem;position:relative;overflow:hidden;transition:transform .4s,box-shadow .4s;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s,box-shadow .4s}
-.tc.vis{opacity:1;transform:none}
-.tc:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(26,107,114,.1)}
-.tc-q{position:absolute;top:.8rem;right:1.2rem;font-family:var(--display);font-size:5.5rem;color:rgba(200,168,75,.1);line-height:1;pointer-events:none}
-.tc-txt{font-family:var(--display);font-size:1.05rem;font-weight:400;font-style:italic;line-height:1.8;color:var(--ink-md);margin-bottom:1.4rem;position:relative;z-index:1}
-.tc-auth{display:flex;align-items:center;gap:10px}
-.tc-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:14px;color:white;flex-shrink:0}
-.ta1{background:var(--teal)}.ta2{background:#5A7A6B}.ta3{background:#7A5A6B}
-.tc-name{font-size:13.5px;font-weight:500;color:var(--ink)}
-.tc-loc{font-size:11.5px;color:var(--ink-soft);font-weight:300}
+.arabic-divider { background: var(--ivory); padding: 3rem 1.5rem; text-align: center; }
+.divider-line { background: rgba(200,168,75,.7); height: 1px; margin: 0 auto 1.2rem; width: 80px; }
+.divider-line.bottom { margin: 1rem auto 1.1rem; }
+.divider-arabic { color: var(--gold); display: block; font-size: 2.5rem; letter-spacing: 6px; line-height: 1; margin: 0 auto; opacity: .5; }
+.divider-caption { color: rgba(26,107,114,.4); font-size: 11px; font-weight: 600; letter-spacing: 2.6px; text-transform: uppercase; }
 
-/* ── CTA ─────────────────────────────────────────────── */
-.cta-sec{background:var(--gold-pale);border-top:1px solid rgba(200,168,75,.18);border-bottom:1px solid rgba(200,168,75,.18);text-align:center;overflow:hidden}
-.cta-sec::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%231A6B72' stroke-width='.4' opacity='.06'%3E%3Cpath d='M60 4L116 60 60 116 4 60Z'/%3E%3Ccircle cx='60' cy='60' r='34'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
-.cta-inner{max-width:680px;margin:0 auto;position:relative;z-index:2}
-.cta-ey{font-family:var(--display);font-size:1.1rem;font-style:italic;color:var(--teal-md);margin-bottom:1rem}
-.cta-h{font-family:var(--display);font-size:clamp(2.8rem,4.5vw,4.8rem);font-weight:400;color:var(--teal-dk);line-height:1.15;margin-bottom:1.4rem}
-.cta-h em{font-style:italic;color:var(--gold)}
-.cta-d{font-size:.9rem;font-weight:300;line-height:1.85;color:var(--ink-soft);margin-bottom:2.5rem}
-.cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
-.btn-teal{background:var(--teal);color:white;font-size:12.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:14px 34px;border-radius:2px;text-decoration:none;transition:all .3s;cursor:none;position:relative;overflow:hidden}
-.btn-teal::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:.5s}
-.btn-teal:hover::after{transform:translateX(100%)}
-.btn-teal:hover{background:var(--teal-dk);transform:translateY(-2px);box-shadow:0 12px 30px rgba(26,107,114,.3)}
-.btn-ol{background:transparent;color:var(--teal);font-size:12.5px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:13px 30px;border-radius:2px;text-decoration:none;border:1px solid var(--teal);transition:all .3s;cursor:none}
-.btn-ol:hover{background:var(--teal);color:white;transform:translateY(-2px)}
+.how { background: var(--teal-dk); overflow: hidden; }
+.how::before { opacity: .74; }
+.steps { display: grid; gap: 3rem; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 4rem; }
+.step { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.step.visible { opacity: 1; transform: translateY(0); }
+.step-number { color: rgba(200,168,75,.18); font-family: var(--display); font-size: 5.5rem; line-height: .9; }
+.step-line { background: rgba(200,168,75,.18); height: 1px; margin: 1.2rem 0 1.25rem; position: relative; width: 100%; }
+.step-line::after { background: rgba(200,168,75,.66); content: ''; height: 1px; left: 0; position: absolute; top: 0; width: 0; }
+.step.visible .step-line::after { animation: drawLine .85s ease forwards; }
+.step-title { color: var(--white); font-family: var(--display); font-size: 1.65rem; font-weight: 400; margin-bottom: .7rem; }
+.step-body { color: rgba(255,255,255,.55); font-size: .875rem; font-weight: 300; line-height: 1.85; }
+@keyframes drawLine { to { width: 60%; } }
 
-/* ── FOOTER ──────────────────────────────────────────── */
-footer{background:var(--ink);padding:5.5rem 5rem 2.5rem}
-.ft{max-width:1200px;margin:0 auto}
-.ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:4rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem}
-.ft-brand-n{font-family:var(--display);font-size:1.6rem;color:white;margin-bottom:.4rem}
-.ft-brand-tag{font-family:var(--display);font-size:.9rem;font-style:italic;color:var(--gold);margin-bottom:1rem}
-.ft-brand-d{font-size:.85rem;font-weight:300;line-height:1.8;color:rgba(255,255,255,.38);max-width:240px}
-.ft-col-h{font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.3);font-weight:500;margin-bottom:1.2rem}
-.ft-links{list-style:none}
-.ft-links li{margin-bottom:.55rem}
-.ft-links a{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
-.ft-links a:hover{color:var(--gold)}
-.ft-bot{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:300;color:rgba(255,255,255,.25)}
-.ft-bot a{color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;margin-left:2rem}
-.ft-bot a:hover{color:var(--gold)}
+.testimonials { background: var(--white); }
+.testimonial-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 3.5rem; }
+.testimonial { background: var(--ivory); border: 1px solid rgba(200,168,75,.22); border-radius: 3px; min-height: 300px; opacity: 0; overflow: hidden; padding: 2rem; position: relative; transform: translateY(24px); transition: opacity .65s ease, transform .35s ease, box-shadow .35s ease; }
+.testimonial.visible { opacity: 1; transform: translateY(0); }
+.testimonial:hover { box-shadow: 0 20px 50px rgba(26,107,114,.1); transform: translateY(-4px); }
+.quote-mark { color: rgba(200,168,75,.1); font-family: var(--display); font-size: 7rem; line-height: 1; position: absolute; right: 1.2rem; top: .2rem; }
+.quote { color: var(--ink-mid); font-family: var(--display); font-size: 1.05rem; font-style: italic; line-height: 1.8; margin-bottom: 1.6rem; position: relative; z-index: 1; }
+.author { align-items: center; display: flex; gap: .75rem; }
+.author-initials { align-items: center; background: var(--teal); border-radius: 50%; color: var(--white); display: flex; font-family: var(--display); height: 38px; justify-content: center; width: 38px; }
+.author-name { color: var(--ink); font-size: 13px; font-weight: 600; }
+.author-location { color: var(--ink-soft); font-size: 12px; font-weight: 300; }
 
-/* ── ANIMATIONS ──────────────────────────────────────── */
-@keyframes slideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-@keyframes fadeD{from{opacity:0}to{opacity:1}}
-.fu{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
-.fu.vis{opacity:1;transform:none}
-.fu:nth-child(2){transition-delay:.1s}
-.fu:nth-child(3){transition-delay:.2s}
-.fc{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s,background .35s}
-.fc.vis{opacity:1;transform:none}
-.fc:nth-child(2){transition-delay:.08s}
-.fc:nth-child(3){transition-delay:.16s}
-.fc:nth-child(4){transition-delay:.24s}
-.fc:nth-child(5){transition-delay:.32s}
-.fc:nth-child(6){transition-delay:.4s}
+.cta { background: var(--gold-pale); overflow: hidden; text-align: center; }
+.cta::before { opacity: .82; }
+.cta-inner { margin: 0 auto; max-width: 680px; position: relative; z-index: 2; }
+.cta-arabic { color: var(--teal-md); font-size: 1.3rem; line-height: 1.5; margin-bottom: .2rem; text-align: center; }
+.cta-translation { color: var(--ink-soft); font-size: 12px; font-style: italic; font-weight: 300; margin-bottom: 1rem; }
+.cta-eyebrow { color: var(--teal); font-family: var(--display); font-size: 1.2rem; font-style: italic; margin-bottom: .75rem; }
+.cta-heading { color: var(--teal-dk); font-family: var(--display); font-size: clamp(3rem, 6vw, 4.7rem); font-weight: 400; line-height: 1.02; margin-bottom: 1.25rem; }
+.cta-heading em { color: var(--gold); font-style: italic; }
+.cta-body { color: var(--ink-soft); font-size: .9rem; font-weight: 300; line-height: 1.85; margin-bottom: 2rem; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
 
-/* ── RESPONSIVE ──────────────────────────────────────── */
-@media(max-width:960px){
-  nav,nav.s{padding:1.1rem 2rem}
-  .nav-links{display:none}
-  .hero-inner{grid-template-columns:1fr;text-align:center;padding:5rem 2rem 4rem;gap:2rem}
-  .hero-body,.hero-btns,.hero-proof{margin-left:auto;margin-right:auto;justify-content:center}
-  .hero-r{display:none}
-  .sec{padding:5rem 2rem}
-  .stats{padding:3rem 2rem;flex-wrap:wrap}
-  .stat+.stat::before{display:none}
-  .f-grid,.steps,.t-grid{grid-template-columns:1fr}
-  .fc.wide{grid-column:span 1}
-  footer{padding:4rem 2rem 2rem}
-  .ft-top{grid-template-columns:1fr 1fr;gap:2rem}
-  .ft-bot{flex-direction:column;gap:1rem;text-align:center}
-  .band-track{animation-duration:14s}
+.footer { background: var(--ink); padding: 5.5rem clamp(1.5rem, 5vw, 5rem) 2rem; }
+.footer-inner { margin: 0 auto; max-width: 1200px; }
+.footer-top { border-bottom: 1px solid rgba(255,255,255,.07); display: grid; gap: 4rem; grid-template-columns: 1.55fr 1fr 1fr 1fr; padding-bottom: 3.8rem; }
+.footer-brand { color: var(--white); font-family: var(--display); font-size: 1.6rem; margin-bottom: .4rem; }
+.footer-tagline { color: var(--gold); font-family: var(--display); font-size: 1rem; font-style: italic; margin-bottom: .55rem; }
+.footer-arabic { color: rgba(200,168,75,.45); font-size: 1rem; margin-bottom: 1rem; }
+.footer-desc { color: rgba(255,255,255,.38); font-size: .85rem; font-weight: 300; line-height: 1.8; max-width: 270px; }
+.footer-heading { color: rgba(255,255,255,.3); font-size: 10.5px; font-weight: 600; letter-spacing: 2px; margin-bottom: 1.15rem; text-transform: uppercase; }
+.footer-links { list-style: none; }
+.footer-links li + li { margin-top: .65rem; }
+.footer-links a { color: rgba(255,255,255,.45); font-size: .86rem; font-weight: 300; text-decoration: none; transition: color .2s ease; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom { align-items: center; color: rgba(255,255,255,.32); display: flex; font-size: 12px; font-weight: 300; justify-content: space-between; padding-top: 2rem; }
+.footer-bottom a { color: rgba(255,255,255,.32); margin-left: 1.5rem; text-decoration: none; transition: color .2s ease; }
+.footer-bottom a:hover { color: var(--gold); }
+
+@media (max-width: 1080px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-left, .hero-right { min-height: auto; }
+  .hero-left { padding-bottom: 8rem; }
+  .hero-right { min-height: 70vh; }
+  .right-stats { position: static; margin-top: 3rem; }
+  .star { margin-bottom: 0; }
+}
+
+@media (max-width: 820px) {
+  .site-nav { padding-inline: 1.25rem; }
+  .nav-links { display: none; }
+  .brand-name { font-size: 1.15rem; }
+  .hero-left { padding-top: 7rem; }
+  .hero-proof { bottom: 2rem; left: 1.5rem; right: 1.5rem; }
+  .stats-bar, .features-grid, .steps, .testimonial-grid, .footer-top { grid-template-columns: 1fr; }
+  .feature-card.wide { grid-column: span 1; }
+  .stat + .stat { border-left: 0; border-top: 1px solid rgba(200,168,75,.22); }
+  .footer-bottom { align-items: flex-start; flex-direction: column; gap: 1rem; }
+  .footer-bottom a { margin-left: 0; margin-right: 1rem; }
+}
+
+@media (max-width: 560px) {
+  .hero-title { font-size: 3.6rem; }
+  .hero-actions, .cta-actions { align-items: stretch; flex-direction: column; }
+  .btn { width: 100%; }
+  .hero-proof { align-items: flex-start; flex-direction: column; }
+  .hero-arabic-word { font-size: 4.2rem; }
+  .right-stats { gap: 1.15rem; }
+  .right-stat strong { font-size: 2.25rem; }
+  .section { padding-block: 5.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
 
-<div id="progress"></div>
-<div id="cur-dot"></div>
-<div id="cur-ring"></div>
-
-<!-- NAV -->
-<nav id="nav">
-  <a href="#" class="logo">
-    <div class="logo-mark">م</div>
-    <span class="logo-name">The Muhsinat Club</span>
+<nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+  <a class="brand" href="#top" aria-label="The Muhsinat Club home">
+    <span class="logo-mark ar">م</span>
+    <span class="brand-name">The Muhsinat Club</span>
   </a>
-  <div class="nav-r">
+  <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#features">Platform</a></li>
-      <li><a href="#how">How it works</a></li>
       <li><a href="#community">Sisterhood</a></li>
+      <li><a href="#about">About</a></li>
     </ul>
-    <a href="#join" class="nav-btn">Join Now</a>
+    <a class="btn btn-gold nav-cta" href="#join">Join Now</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-ara"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="hero-inner">
-    <div class="hero-l">
-      <div class="badge"><div class="pulse-dot"></div>Now available as a PWA</div>
-      <h1 class="hero-h1">
-        <span class="w1">Your home for</span>
-        <span class="w2">faith &amp; sisterhood</span>
-        <span class="w3">in one place.</span>
-      </h1>
-      <p class="hero-tag">Ajr Hunting for the Home in Jannah</p>
-      <p class="hero-body">A curated sanctuary for Muslim women — daily halaqahs, a private journal, Jannah Coins rewards, and a community rooted in values that last.</p>
-      <div class="hero-btns">
-        <a href="#join" class="btn-gold">Join the Club</a>
-        <a href="#features" class="btn-ghost">Explore the app</a>
+<main id="top">
+  <section class="hero" aria-label="The Muhsinat Club introduction">
+    <div class="hero-left pattern-gold">
+      <div class="bismillah ar" aria-hidden="true">بِسْمِ اللَّهِ</div>
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          <span>A home for</span>
+          <span>faith &amp; sisterhood</span>
+          <span>that lasts.</span>
+        </h1>
+        <p class="hero-tagline">Ajr Hunting for the Home in Jannah</p>
+        <p class="hero-body">A refined community platform for Muslim women seeking sacred routines, sincere companionship, and beautiful tools for worship, reflection, learning, and service.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#join">Join the Club</a>
+          <a class="btn btn-ghost" href="#features">Explore the platform</a>
+        </div>
       </div>
       <div class="hero-proof">
-        <div class="avatars">
-          <div class="av av1">A</div>
-          <div class="av av2">F</div>
-          <div class="av av3">Z</div>
-          <div class="av av4">K</div>
+        <div class="avatars" aria-hidden="true">
+          <span class="avatar">A</span>
+          <span class="avatar">F</span>
+          <span class="avatar">Z</span>
+          <span class="avatar">K</span>
         </div>
-        <p class="proof-txt"><strong>Sisters across chapters</strong> are already inside</p>
+        <p class="proof-text">Sisters across the community are already inside</p>
       </div>
     </div>
-    <div class="hero-r">
-      <div class="phone">
-        <div class="notch"></div>
-        <div class="p-screen">
-          <div class="p-time"><span>9:41</span><span>●●●</span></div>
-          <div class="p-greet">
-            <div class="p-greet-lbl">Assalamu Alaykum</div>
-            <div class="p-greet-val">Fatimah, habibti 🌙</div>
-          </div>
-          <div class="p-card">
-            <div class="p-lbl">Today's Halaqah</div>
-            <div class="p-ttl">Finding Sakīnah in the Chaos</div>
-            <div class="p-bar"><div class="p-fill"></div></div>
-          </div>
-          <div class="p-coins">
-            <div class="coin-ic">✦</div>
-            <div>
-              <div class="coin-n">Jannah Coins</div>
-              <div class="coin-v">340</div>
-            </div>
-          </div>
-          <div class="p-card">
-            <div class="p-lbl">Next Event · Abuja</div>
-            <div class="p-ttl">TMC Monthly Circle</div>
-          </div>
-        </div>
-        <div class="p-nav-bar">
-          <div class="p-nav-dot a"></div>
-          <div class="p-nav-dot"></div>
-          <div class="p-nav-dot"></div>
-          <div class="p-nav-dot"></div>
-          <div class="p-nav-dot"></div>
-        </div>
-        <div class="pill-1">✦ 50 coins earned</div>
-        <div class="pill-2">📍 Abuja Chapter</div>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-hint"><div class="sc-line"></div></div>
-</section>
-
-<!-- BAND -->
-<div class="band">
-  <div class="band-track" id="band-track"></div>
-</div>
-
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-n" data-target="500">0</div>
-    <div class="stat-l">Sisters &amp; growing</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n" data-target="12">0</div>
-    <div class="stat-l">City chapters</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n" data-target="340">0</div>
-    <div class="stat-l">Avg coins earned at launch</div>
-  </div>
-</div>
-
-<!-- FEATURES -->
-<section class="sec feat-sec ara" id="features">
-  <div class="sec-inner">
-    <div class="fu">
-      <span class="label">The Platform</span>
-      <h2 class="sh">Everything a sister needs,<br>in one <em>sacred space.</em></h2>
-    </div>
-    <div class="f-grid">
-      <div class="fc wide">
-        <div class="fc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <div class="fc-t">Halaqahs &amp; Events</div>
-        <div class="fc-d">Browse upcoming circles and gatherings. RSVP with one tap and receive a reminder before it begins. Your spiritual calendar, always at hand.</div>
-        <span class="fc-tag">RSVP enabled</span>
-      </div>
-      <div class="fc">
-        <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
-        <div class="fc-t">Jannah Coins</div>
-        <div class="fc-d">Earn rewards for showing up — on joining, attending events, and referring sisters into the club.</div>
-        <span class="fc-tag">Earn &amp; redeem</span>
-      </div>
-      <div class="fc">
-        <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4z"/></svg></div>
-        <div class="fc-t">Private Journal</div>
-        <div class="fc-d">A spiritual diary — safe, private, entirely yours. Track your mood, write reflections, and build your personal du'a list.</div>
-        <span class="fc-tag">Fully private</span>
-      </div>
-      <div class="fc">
-        <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
-        <div class="fc-t">The Souq</div>
-        <div class="fc-d">Discover and champion Muslim women-owned businesses. List your brand and connect with a values-aligned community.</div>
-        <span class="fc-tag">Shop with sisters</span>
-      </div>
-      <div class="fc">
-        <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
-        <div class="fc-t">Resources Library</div>
-        <div class="fc-d">The Du'a Book, Dear Allah Series, Pocket Guides, and Halaqah recordings — curated knowledge when you need it most.</div>
-        <span class="fc-tag">Curated content</span>
-      </div>
-      <div class="fc wide">
-        <div class="fc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15s.5-5 5-5 5 5 5 5"/><circle cx="12" cy="8" r="2"/></svg></div>
-        <div class="fc-t">Your Legacy Card</div>
-        <div class="fc-d">A digital membership card carrying your name, city chapter, membership tier, and Jannah Coins — a mark of your place in the Muhsinat sisterhood.</div>
-        <span class="fc-tag">Exclusive to members</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="sec how-sec" id="how">
-  <div class="sec-inner" style="position:relative;z-index:2">
-    <div class="fu">
-      <span class="label" style="color:var(--gold)">How it works</span>
-      <h2 class="sh-w">From sign-up to <em>sisterhood</em><br>in minutes.</h2>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-n">01</div>
-        <div class="step-line"></div>
-        <div class="step-t">Create your account</div>
-        <div class="step-d">Register in under two minutes. Choose your interests, goals, and city chapter — then receive your first Jannah Coins as a welcome gift.</div>
-      </div>
-      <div class="step">
-        <div class="step-n">02</div>
-        <div class="step-line"></div>
-        <div class="step-t">Install the app</div>
-        <div class="step-d">Add TMC to your home screen — no app store required. Works beautifully on iPhone and Android, straight from your browser.</div>
-      </div>
-      <div class="step">
-        <div class="step-n">03</div>
-        <div class="step-line"></div>
-        <div class="step-t">Show up &amp; earn</div>
-        <div class="step-d">Attend halaqahs, write in your journal, explore the Souq. Every act of showing up is recognised — spiritually and through your Jannah Coins.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="sec testi-sec" id="community">
-  <div class="sec-inner">
-    <div class="fu">
-      <span class="label">The Sisterhood</span>
-      <h2 class="sh">Words from<br>the <em>club.</em></h2>
-    </div>
-    <div class="t-grid">
-      <div class="tc">
-        <div class="tc-q">"</div>
-        <p class="tc-txt">Having a journal that is truly mine — no algorithm, no audience — has changed how I process my faith. The du'a list is something I didn't know I needed.</p>
-        <div class="tc-auth">
-          <div class="tc-av ta1">A</div>
-          <div><div class="tc-name">Amina K.</div><div class="tc-loc">Abuja Chapter</div></div>
-        </div>
-      </div>
-      <div class="tc">
-        <div class="tc-q">"</div>
-        <p class="tc-txt">The Souq gave my small business visibility I couldn't get anywhere else. These are my sisters — they shop with intention. My first three clients came from TMC.</p>
-        <div class="tc-auth">
-          <div class="tc-av ta2">F</div>
-          <div><div class="tc-name">Fatimah O.</div><div class="tc-loc">Lagos Chapter</div></div>
-        </div>
-      </div>
-      <div class="tc">
-        <div class="tc-q">"</div>
-        <p class="tc-txt">I've attended three halaqahs this month — more than all of last year. The reminder notification actually works. Jannah Coins are a bonus that keeps me coming back.</p>
-        <div class="tc-auth">
-          <div class="tc-av ta3">Z</div>
-          <div><div class="tc-name">Zainab M.</div><div class="tc-loc">Kano Chapter</div></div>
+    <div class="hero-right pattern-teal">
+      <div class="calligraphy-panel">
+        <div class="rule" aria-hidden="true"></div>
+        <div class="hero-arabic-word ar">المحسنات</div>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="translation">The Doers of Good</p>
+        <svg class="star" viewBox="0 0 100 100" aria-hidden="true">
+          <path fill="currentColor" d="M50 0 61 32 93 7 68 39 100 50 68 61 93 93 61 68 50 100 39 68 7 93 32 61 0 50 32 39 7 7 39 32Z"/>
+        </svg>
+        <div class="right-stats" aria-label="Community highlights">
+          <div class="right-stat"><strong>500+</strong><span>Sisters</span></div>
+          <div class="right-stat"><strong>7</strong><span>Events monthly</span></div>
+          <div class="right-stat"><strong>∞</strong><span>Ajr potential</span></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA -->
-<section class="sec cta-sec" id="join">
-  <div class="cta-inner">
-    <div class="fu">
-      <p class="cta-ey">Ready, sister?</p>
-      <h2 class="cta-h">Your seat in the<br><em>sisterhood</em> is waiting.</h2>
-      <p class="cta-d">Step into a community built on faith, intention, and genuine care. Install the app today and earn your first Jannah Coins in minutes.</p>
-      <div class="cta-btns">
-        <a href="#" class="btn-teal">Create Your Account</a>
-        <a href="#features" class="btn-ol">See the platform</a>
+  <section class="band" aria-label="Platform highlights">
+    <div class="band-track" id="band-track"></div>
+  </section>
+
+  <section class="stats-bar" aria-label="The Muhsinat Club statistics">
+    <div class="stat">
+      <div class="stat-number" data-count="500" data-suffix="+">0</div>
+      <div class="stat-label">Sisters &amp; growing</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-count="12">0</div>
+      <div class="stat-label">Halaqahs this year</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-count="340">0</div>
+      <div class="stat-label">Average coins on join</div>
+    </div>
+  </section>
+
+  <section class="section features pattern-teal" id="features">
+    <div class="section-inner">
+      <div class="fade-up">
+        <span class="eyebrow">The Platform</span>
+        <h2 class="section-heading">Everything a sister needs, in one <em>sacred space.</em></h2>
+      </div>
+      <div class="features-grid">
+        <article class="feature-card wide">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3 class="feature-title">Halaqahs &amp; Events</h3>
+          <p class="feature-body">Browse upcoming circles, reserve your seat, and keep your week anchored by gatherings designed for knowledge, remembrance, and meaningful connection.</p>
+          <span class="feature-tag">RSVP enabled</span>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 7.2H22l-6 4.5 2.3 7.3L12 16.7 5.7 21 8 13.7 2 9.2h7.5z"/></svg></div>
+          <h3 class="feature-title">Jannah Coins</h3>
+          <p class="feature-body">Receive thoughtful rewards for showing up, inviting sisters, attending gatherings, and building habits that beautify your everyday worship.</p>
+          <span class="feature-tag">Earn &amp; redeem</span>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5 5 15l11-11a2.1 2.1 0 0 1 3 3L8 18z"/><path d="M13.5 5.5l5 5"/><path d="M4 20h16"/></svg></div>
+          <h3 class="feature-title">Private Journal</h3>
+          <p class="feature-body">A quiet space for reflections, gratitude, goals, and du'a. Private by design, gentle in tone, and always ready when your heart needs room.</p>
+          <span class="feature-tag">Fully private</span>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7z"/><path d="M9 7a3 3 0 0 1 6 0"/><path d="M6 7 4 3h16l-2 4"/></svg></div>
+          <h3 class="feature-title">The Souq</h3>
+          <p class="feature-body">Discover Muslim women-owned brands, support values-aligned commerce, and list your own work inside a trusted member marketplace.</p>
+          <span class="feature-tag">Shop with sisters</span>
+        </article>
+        <article class="feature-card wide">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h5"/><path d="M7 14h10"/><circle cx="17" cy="10" r="1.5"/></svg></div>
+          <h3 class="feature-title">Legacy Card</h3>
+          <p class="feature-body">Carry a digital membership card that honours your place in the sisterhood, your progress, and the small consistent acts that shape a lasting legacy.</p>
+          <span class="feature-tag">Exclusive to members</span>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <h3 class="feature-title">Resources Library</h3>
+          <p class="feature-body">Access curated du'a guides, reflections, study notes, and recordings for the seasons when you need knowledge close at hand.</p>
+          <span class="feature-tag">Curated content</span>
+        </article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="ft">
-    <div class="ft-top">
+  <section class="arabic-divider" aria-label="Arabic divider">
+    <div class="divider-line"></div>
+    <span class="divider-arabic ar">ٱلْمُحْسِنَاتُ</span>
+    <div class="divider-line bottom"></div>
+    <p class="divider-caption">The Muhsinat Club</p>
+  </section>
+
+  <section class="section how pattern-gold" id="how">
+    <div class="section-inner">
+      <div class="fade-up">
+        <span class="eyebrow">How it works</span>
+        <h2 class="section-heading light">From intention to <em>sisterhood</em> in minutes.</h2>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="step-number">01</div>
+          <div class="step-line"></div>
+          <h3 class="step-title">Create your account</h3>
+          <p class="step-body">Begin with your name, interests, and spiritual goals so the platform can feel personal, calm, and genuinely useful from the first visit.</p>
+        </article>
+        <article class="step">
+          <div class="step-number">02</div>
+          <div class="step-line"></div>
+          <h3 class="step-title">Choose your rhythm</h3>
+          <p class="step-body">Find halaqahs, journal prompts, resources, and reminders that support the season you are in without pressure or noise.</p>
+        </article>
+        <article class="step">
+          <div class="step-number">03</div>
+          <div class="step-line"></div>
+          <h3 class="step-title">Grow with sisters</h3>
+          <p class="step-body">Show up, earn Jannah Coins, support the Souq, and build friendships rooted in sincerity, service, and shared hope for Jannah.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials" id="community">
+    <div class="section-inner">
+      <div class="fade-up">
+        <span class="eyebrow">The Sisterhood</span>
+        <h2 class="section-heading">Words from the <em>club.</em></h2>
+      </div>
+      <div class="testimonial-grid">
+        <article class="testimonial">
+          <div class="quote-mark">&quot;</div>
+          <p class="quote">The journal feels like a quiet room for my thoughts. I come in for a few minutes and leave with my heart softer and my intentions clearer.</p>
+          <div class="author"><span class="author-initials">A</span><div><p class="author-name">Amina K.</p><p class="author-location">United Kingdom</p></div></div>
+        </article>
+        <article class="testimonial">
+          <div class="quote-mark">&quot;</div>
+          <p class="quote">TMC makes faith feel beautifully practical. The halaqahs, reminders, and sisterly warmth helped me rebuild consistency without feeling alone.</p>
+          <div class="author"><span class="author-initials">F</span><div><p class="author-name">Fatimah O.</p><p class="author-location">Nigeria</p></div></div>
+        </article>
+        <article class="testimonial">
+          <div class="quote-mark">&quot;</div>
+          <p class="quote">The Souq introduced me to women-led brands I now genuinely love. It feels good to support sisters while staying connected to the community.</p>
+          <div class="author"><span class="author-initials">Z</span><div><p class="author-name">Zainab M.</p><p class="author-location">Canada</p></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta pattern-teal" id="join">
+    <div class="cta-inner fade-up">
+      <p class="cta-arabic ar">وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ</p>
+      <p class="cta-translation">&quot;And Allah loves those who do good.&quot; — Qur'an 3:134</p>
+      <p class="cta-eyebrow">Ready, sister?</p>
+      <h2 class="cta-heading">Your seat in the <em>sisterhood</em> is waiting.</h2>
+      <p class="cta-body">Step into a warm, refined space for worship, learning, reflection, rewards, and sincere companionship built for Muslim women.</p>
+      <div class="cta-actions">
+        <a class="btn btn-gold" href="#top">Create Your Account</a>
+        <a class="btn btn-outline" href="#features">See the platform</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="about">
+  <div class="footer-inner">
+    <div class="footer-top">
       <div>
-        <div class="ft-brand-n">The Muhsinat Club</div>
-        <div class="ft-brand-tag">Ajr Hunting for the Home in Jannah</div>
-        <div class="ft-brand-d">A curated digital home for Muslim women — faith, community, growth, and rewards in one elegant sanctuary.</div>
+        <p class="footer-brand">The Muhsinat Club</p>
+        <p class="footer-tagline">Ajr Hunting for the Home in Jannah</p>
+        <p class="footer-arabic ar">المحسنات نادي</p>
+        <p class="footer-desc">A premium faith-based community platform for Muslim women pursuing goodness, sisterhood, knowledge, and lasting reward.</p>
       </div>
       <div>
-        <div class="ft-col-h">Platform</div>
-        <ul class="ft-links">
-          <li><a href="#">Halaqahs &amp; Events</a></li>
-          <li><a href="#">Private Journal</a></li>
-          <li><a href="#">Jannah Coins</a></li>
-          <li><a href="#">The Souq</a></li>
-          <li><a href="#">Resources</a></li>
+        <h3 class="footer-heading">Platform</h3>
+        <ul class="footer-links">
+          <li><a href="#features">Halaqahs &amp; Events</a></li>
+          <li><a href="#features">Private Journal</a></li>
+          <li><a href="#features">Jannah Coins</a></li>
+          <li><a href="#features">Member Souq</a></li>
         </ul>
       </div>
       <div>
-        <div class="ft-col-h">Community</div>
-        <ul class="ft-links">
-          <li><a href="#">City Chapters</a></li>
-          <li><a href="#">Volunteer</a></li>
-          <li><a href="#">Mentorship</a></li>
-          <li><a href="#">Support TMC</a></li>
+        <h3 class="footer-heading">Community</h3>
+        <ul class="footer-links">
+          <li><a href="#community">Sister Stories</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#features">Legacy Card</a></li>
+          <li><a href="#join">Join TMC</a></li>
         </ul>
       </div>
       <div>
-        <div class="ft-col-h">About</div>
-        <ul class="ft-links">
-          <li><a href="#">Our Story</a></li>
-          <li><a href="#">Safe Space Policy</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Contact</a></li>
+        <h3 class="footer-heading">About</h3>
+        <ul class="footer-links">
+          <li><a href="#about">Our Intention</a></li>
+          <li><a href="#about">Safety</a></li>
+          <li><a href="#about">Contact</a></li>
+          <li><a href="#about">Support</a></li>
         </ul>
       </div>
     </div>
-    <div class="ft-bot">
-      <span>© <span id="yr"></span> The Muhsinat Club. All rights reserved.</span>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> The Muhsinat Club. All rights reserved.</p>
       <div>
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Cookies</a>
+        <a href="#about">Privacy</a>
+        <a href="#about">Terms</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-// Year
-document.getElementById('yr').textContent = new Date().getFullYear();
+const nav = document.getElementById('site-nav');
+const progress = document.getElementById('progress');
+const year = document.getElementById('year');
+year.textContent = new Date().getFullYear();
 
-// Cursor
-const dot = document.getElementById('cur-dot');
-const ring = document.getElementById('cur-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
-(function animRing() { rx += (mx - rx) * .12; ry += (my - ry) * .12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); })();
-document.querySelectorAll('a,button').forEach(el => {
-  el.addEventListener('mouseenter', () => { dot.style.width = '14px'; dot.style.height = '14px'; ring.style.width = '48px'; ring.style.height = '48px'; });
-  el.addEventListener('mouseleave', () => { dot.style.width = '8px'; dot.style.height = '8px'; ring.style.width = '32px'; ring.style.height = '32px'; });
+function updateChrome() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+  progress.style.width = pct + '%';
+}
+updateChrome();
+window.addEventListener('scroll', updateChrome, { passive: true });
+
+const bandItems = ['Daily Reflections', 'Jannah Coins', 'Private Journal', 'Member Souq', 'Halaqahs', 'Legacy Card', 'Faith Community'];
+const bandTrack = document.getElementById('band-track');
+const bandHtml = bandItems.map(item => `<span class="band-item">✦ ${item}</span>`).join('');
+bandTrack.innerHTML = bandHtml + bandHtml;
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    revealObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.16 });
+
+document.querySelectorAll('.fade-up, .feature-card, .testimonial').forEach((el, index) => {
+  if (el.classList.contains('feature-card')) el.style.transitionDelay = `${(index % 6) * 80}ms`;
+  if (el.classList.contains('testimonial')) el.style.transitionDelay = `${(index % 3) * 90}ms`;
+  revealObserver.observe(el);
 });
 
-// Nav scroll + progress
-const nav = document.getElementById('nav');
-const prog = document.getElementById('progress');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('s', scrollY > 60);
-  const pct = scrollY / (document.body.scrollHeight - innerHeight) * 100;
-  prog.style.width = pct + '%';
-});
+const stepObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const steps = Array.from(document.querySelectorAll('.step'));
+    const delay = steps.indexOf(entry.target) * 180;
+    window.setTimeout(() => entry.target.classList.add('visible'), delay);
+    stepObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.22 });
+document.querySelectorAll('.step').forEach(step => stepObserver.observe(step));
 
-// Band
-const items = ['Daily Reflections','Jannah Coins','Private Journal','Member Souq','City Chapters','Legacy Card','Faith Community','Halaqahs'];
-const sep = '<span class="band-sep">✦</span>';
-const track = document.getElementById('band-track');
-const built = items.map(i => `<div class="band-item">${i}</div>${sep}`).join('');
-track.innerHTML = built + built;
-
-// Scroll observer
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fu,.fc,.step,.tc').forEach((el, i) => {
-  if (!el.classList.contains('fu')) el.style.transitionDelay = (i % 5) * 80 + 'ms';
-  obs.observe(el);
-});
-
-// Stats counter
-const statEls = document.querySelectorAll('.stat-n[data-target]');
-const sObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el = e.target, target = +el.dataset.target;
-    let start = 0;
-    const suffix = target >= 100 ? '+' : '';
-    const dur = 1800, step = 16;
-    const inc = target / (dur / step);
-    const t = setInterval(() => {
-      start = Math.min(start + inc, target);
-      el.textContent = Math.floor(start) + suffix;
-      if (start >= target) clearInterval(t);
-    }, step);
-    sObs.unobserve(el);
+const statObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = Number(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now) {
+      const progressValue = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progressValue, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
+      if (progressValue < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    statObserver.unobserve(el);
   });
 }, { threshold: 0.5 });
-statEls.forEach(el => sObs.observe(el));
+document.querySelectorAll('[data-count]').forEach(stat => statObserver.observe(stat));
 
-// Step lines
-const stepObs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('vis'), i * 180);
-      stepObs.unobserve(e.target);
-    }
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (finePointer) {
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  document.addEventListener('mousemove', event => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
   });
-}, { threshold: 0.2 });
-document.querySelectorAll('.step').forEach(el => stepObs.observe(el));
+
+  function animateCursor() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.querySelectorAll('a, button').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      dot.style.transform = 'translate(-50%, -50%) scale(1.65)';
+      ring.style.width = '48px';
+      ring.style.height = '48px';
+    });
+    item.addEventListener('mouseleave', () => {
+      dot.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.width = '32px';
+      ring.style.height = '32px';
+    });
+  });
+}
 </script>
 </body>
 </html>
