@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1A6B72">
+  <meta name="description" content="The Muhsinat Club is a faith-based community PWA for Muslim women, built for faith, sisterhood, and growth.">
+  <title>The Muhsinat Club | Ajr Hunting for the Home in Jannah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Lavonia Classy';
+      src: url('/fonts/LavoniaClassy.woff2') format('woff2'),
+           url('/fonts/LavoniaClassy.woff') format('woff');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Garet';
+      src: url('/fonts/Garet-Book.woff2') format('woff2'),
+           url('/fonts/Garet-Book.woff') format('woff');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Garet';
+      src: url('/fonts/Garet-Heavy.woff2') format('woff2'),
+           url('/fonts/Garet-Heavy.woff') format('woff');
+      font-weight: 600;
+      font-display: swap;
+    }
+
+    :root {
+      --teal: #1A6B72;
+      --teal-dark: #0F4449;
+      --teal-soft: rgba(26, 107, 114, 0.08);
+      --gold: #C8A84B;
+      --gold-pale: #FDF6E3;
+      --ivory: #FAF8F3;
+      --ink: #1C1A17;
+      --ink-mid: rgba(28, 26, 23, 0.68);
+      --white-soft: rgba(255, 255, 255, 0.72);
+      --font-display: 'Lavonia Classy', 'Dancing Script', cursive;
+      --font-body: 'Garet', 'Nunito', sans-serif;
+      --section-pad: clamp(5rem, 9vw, 8rem);
+      --shell: min(1140px, calc(100% - 40px));
+      --tile-teal: url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231A6B72' stroke-width='1.25' opacity='0.13'%3E%3Cpath d='M48 6 90 48 48 90 6 48Z'/%3E%3Ccircle cx='48' cy='48' r='24'/%3E%3Cpath d='M48 25 71 48 48 71 25 48Z'/%3E%3Cpath d='M48 6v19M48 71v19M6 48h19M71 48h19'/%3E%3C/g%3E%3C/svg%3E");
+      --tile-gold: url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A84B' stroke-width='1.25' opacity='0.18'%3E%3Cpath d='M48 6 90 48 48 90 6 48Z'/%3E%3Ccircle cx='48' cy='48' r='24'/%3E%3Cpath d='M48 25 71 48 48 71 25 48Z'/%3E%3Cpath d='M48 6v19M48 71v19M6 48h19M71 48h19'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--ivory);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    body::selection {
+      color: var(--ivory);
+      background: var(--teal);
+    }
+
+    h1,
+    h2,
+    h3,
+    .brand-word,
+    .display-text,
+    .tagline,
+    blockquote,
+    .cta-eyebrow {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 0.95;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.85rem 1.35rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      line-height: 1;
+      text-transform: uppercase;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
+      cursor: pointer;
+    }
+
+    button:hover,
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      color: var(--teal-dark);
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .btn-teal {
+      color: var(--ivory);
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .btn-ghost-light {
+      color: rgba(255, 255, 255, 0.9);
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.34);
+    }
+
+    .btn-ghost-dark {
+      color: var(--teal-dark);
+      background: transparent;
+      border-color: rgba(26, 107, 114, 0.36);
+    }
+
+    .shell {
+      width: var(--shell);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: block;
+      margin-bottom: 0.9rem;
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 760px;
+      font-size: clamp(2.4rem, 3.5vw, 4rem);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+    }
+
+    .text-teal {
+      color: var(--teal);
+    }
+
+    .text-gold {
+      color: var(--gold);
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 50;
+      width: 100%;
+      color: var(--ivory);
+      border-bottom: 1px solid transparent;
+      transition: background 240ms ease, border-color 240ms ease, backdrop-filter 240ms ease, color 240ms ease, box-shadow 240ms ease;
+    }
+
+    .site-nav.is-scrolled {
+      color: var(--ink);
+      background: rgba(250, 248, 243, 0.82);
+      border-bottom-color: rgba(200, 168, 75, 0.42);
+      box-shadow: 0 16px 36px rgba(28, 26, 23, 0.06);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: var(--shell);
+      min-height: 76px;
+      margin: 0 auto;
+      gap: 2rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: max-content;
+    }
+
+    .logo-mark {
+      display: inline-grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      color: var(--ivory);
+      background: var(--teal);
+      border: 1px solid rgba(200, 168, 75, 0.62);
+      border-radius: 50%;
+      font-family: Georgia, serif;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .brand-word {
+      font-size: 17px;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2.2vw, 2rem);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .nav-links a:not(.btn) {
+      opacity: 0.82;
+      transition: color 180ms ease, opacity 180ms ease;
+    }
+
+    .nav-links a:not(.btn):hover {
+      color: var(--gold);
+      opacity: 1;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 100vh;
+      padding: 8.5rem 0 5rem;
+      color: var(--ivory);
+      background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background-image: var(--tile-gold);
+      background-size: 104px 104px;
+      content: "";
+    }
+
+    .hero::after {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 84% 18%, rgba(200, 168, 75, 0.12) 0 14rem, transparent 27rem),
+        radial-gradient(circle at 9% 88%, rgba(200, 168, 75, 0.12) 0 12rem, transparent 26rem),
+        linear-gradient(90deg, rgba(15, 68, 73, 0.18), rgba(15, 68, 73, 0.02));
+      content: "";
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(330px, 0.78fr);
+      align-items: center;
+      gap: clamp(3rem, 7vw, 6rem);
+      width: var(--shell);
+      margin: auto;
+    }
+
+    .hero-copy {
+      max-width: 670px;
+    }
+
+    .pwa-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1.4rem;
+      padding: 0.45rem 0.75rem;
+      color: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.07);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      max-width: 780px;
+      font-size: clamp(3.2rem, 5vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 .growth {
+      display: inline-block;
+      color: #fff;
+      font-size: 1.12em;
+    }
+
+    .hero .tagline {
+      margin-top: 1.25rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+
+    .hero-body {
+      max-width: 600px;
+      margin-top: 1.5rem;
+      color: var(--white-soft);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 2rem;
+    }
+
+    .social-proof {
+      display: flex;
+      align-items: center;
+      gap: 0.95rem;
+      margin-top: 2.1rem;
+      color: rgba(255, 255, 255, 0.68);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 300;
+    }
+
+    .avatars {
+      display: flex;
+      min-width: 112px;
+    }
+
+    .avatar {
+      display: inline-grid;
+      width: 36px;
+      height: 36px;
+      margin-left: -8px;
+      place-items: center;
+      color: var(--teal-dark);
+      background: var(--ivory);
+      border: 2px solid rgba(15, 68, 73, 0.78);
+      border-radius: 50%;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .phone-wrap {
+      display: flex;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    .phone {
+      position: relative;
+      width: min(360px, 100%);
+      min-height: 650px;
+      padding: 1rem;
+      color: var(--ivory);
+      background: rgba(15, 68, 73, 0.64);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 36px;
+      box-shadow: 0 42px 90px rgba(4, 29, 31, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      transform: rotate(2deg);
+      animation: float 6s ease-in-out infinite;
+      backdrop-filter: blur(18px);
+    }
+
+    .phone::before {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      width: 76px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 20px;
+      transform: translateX(-50%);
+      content: "";
+    }
+
+    .phone-screen {
+      min-height: 616px;
+      padding: 2.25rem 1rem 1rem;
+      border: 1px solid rgba(200, 168, 75, 0.24);
+      border-radius: 28px;
+      background:
+        linear-gradient(rgba(250, 248, 243, 0.93), rgba(250, 248, 243, 0.93)),
+        var(--tile-teal);
+      color: var(--ink);
+      overflow: hidden;
+    }
+
+    .phone-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .phone-kicker,
+    .phone-label,
+    .phone-chip {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .phone-title,
+    .phone-card h3 {
+      font-size: 1.5rem;
+      color: var(--teal-dark);
+    }
+
+    .phone-stack {
+      display: grid;
+      gap: 0.72rem;
+    }
+
+    .phone-card {
+      position: relative;
+      padding: 1rem;
+      border: 1px solid rgba(200, 168, 75, 0.42);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 16px 30px rgba(28, 26, 23, 0.06);
+    }
+
+    .phone-card p {
+      color: var(--ink-mid);
+      font-family: var(--font-body);
+      font-size: 0.76rem;
+      line-height: 1.6;
+    }
+
+    .phone-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      color: var(--teal);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .phone-pill {
+      display: inline-flex;
+      width: max-content;
+      margin-top: 0.75rem;
+      padding: 0.35rem 0.55rem;
+      color: var(--teal-dark);
+      background: rgba(200, 168, 75, 0.28);
+      border: 1px solid rgba(200, 168, 75, 0.52);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .phone-pill.teal {
+      color: var(--ivory);
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .coins {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .coin-count {
+      display: grid;
+      width: 72px;
+      height: 72px;
+      place-items: center;
+      color: var(--gold);
+      border: 1px solid rgba(200, 168, 75, 0.58);
+      border-radius: 50%;
+      font-family: var(--font-display);
+      font-size: 2rem;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      right: clamp(1.2rem, 4vw, 3.5rem);
+      bottom: 2.1rem;
+      display: grid;
+      justify-items: center;
+      gap: 0.75rem;
+      color: rgba(255, 255, 255, 0.55);
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 54px;
+      background: rgba(255, 255, 255, 0.18);
+      overflow: hidden;
+    }
+
+    .scroll-line::before {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--gold);
+      transform-origin: top;
+      animation: draw-down 2s ease-in-out infinite;
+      content: "";
+    }
+
+    .announcement {
+      color: var(--teal-dark);
+      background: var(--gold);
+      overflow: hidden;
+    }
+
+    .announcement-track {
+      display: flex;
+      justify-content: center;
+      gap: clamp(1rem, 3vw, 2.5rem);
+      width: var(--shell);
+      margin: 0 auto;
+      padding: 1rem 0;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .features {
+      position: relative;
+      padding: var(--section-pad) 0;
+      background: var(--ivory);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .features::before,
+    .cta::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image: var(--tile-teal);
+      background-size: 96px 96px;
+      content: "";
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5px;
+      margin-top: 3rem;
+      background: rgba(200, 168, 75, 0.54);
+      border: 1.5px solid rgba(200, 168, 75, 0.54);
+    }
+
+    .feature-card {
+      min-height: 260px;
+      padding: clamp(1.35rem, 3vw, 2rem);
+      background: rgba(250, 248, 243, 0.92);
+      transition: background 200ms ease, transform 200ms ease;
+    }
+
+    .feature-card:hover {
+      background: rgba(26, 107, 114, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .feature-card.wide {
+      grid-column: span 2;
+    }
+
+    .feature-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 1.4rem;
+      place-items: center;
+      color: var(--teal);
+      border: 1px solid rgba(26, 107, 114, 0.28);
+      font-size: 1.25rem;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 0.8rem;
+      color: var(--teal-dark);
+      font-size: 1.4rem;
+    }
+
+    .feature-card p {
+      max-width: 520px;
+      color: var(--ink-mid);
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .feature-tag {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: var(--teal);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .how {
+      position: relative;
+      padding: var(--section-pad) 0;
+      color: var(--ivory);
+      background: var(--teal-dark);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .how::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image: var(--tile-gold);
+      background-size: 104px 104px;
+      content: "";
+    }
+
+    .how-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: 3.25rem;
+    }
+
+    .how .section-title {
+      color: #fff;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .step {
+      padding: 1.5rem 0 0;
+    }
+
+    .step-number {
+      color: rgba(200, 168, 75, 0.2);
+      font-family: var(--font-display);
+      font-size: 5rem;
+      line-height: 0.82;
+    }
+
+    .step-divider {
+      width: 100%;
+      height: 1px;
+      margin: 1.25rem 0 1.35rem;
+      background: rgba(200, 168, 75, 0.58);
+    }
+
+    .step h3 {
+      margin-bottom: 0.75rem;
+      color: #fff;
+      font-size: 1.6rem;
+    }
+
+    .step p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .testimonials {
+      padding: var(--section-pad) 0;
+      background: var(--ivory);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .testimonial-card {
+      position: relative;
+      min-height: 300px;
+      padding: 2rem;
+      border: 1px solid rgba(200, 168, 75, 0.38);
+      background: rgba(255, 255, 255, 0.35);
+      overflow: hidden;
+    }
+
+    .quote-mark {
+      position: absolute;
+      top: -0.8rem;
+      right: 1.2rem;
+      color: rgba(200, 168, 75, 0.12);
+      font-family: var(--font-display);
+      font-size: 9rem;
+      line-height: 1;
+    }
+
+    blockquote {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: var(--ink-mid);
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 2rem;
+      font-family: var(--font-body);
+    }
+
+    .initials {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      color: var(--ivory);
+      background: var(--teal);
+      border: 1px solid rgba(200, 168, 75, 0.66);
+      border-radius: 50%;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .author-name {
+      color: var(--ink);
+      font-size: 0.84rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .author-chapter {
+      color: rgba(28, 26, 23, 0.48);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .cta {
+      position: relative;
+      padding: var(--section-pad) 0;
+      background: var(--gold-pale);
+      text-align: center;
+      isolation: isolate;
+    }
+
+    .cta-inner {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .cta-eyebrow {
+      display: block;
+      margin-bottom: 1rem;
+      color: var(--teal);
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .cta h2 {
+      font-size: clamp(2.5rem, 4vw, 4.3rem);
+      font-weight: 400;
+    }
+
+    .cta p {
+      max-width: 620px;
+      margin: 1.4rem auto 0;
+      color: var(--ink-mid);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+      margin-top: 2rem;
+    }
+
+    .footer {
+      padding: 4.5rem 0 1.8rem;
+      color: rgba(255, 255, 255, 0.5);
+      background: var(--ink);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .footer-tagline {
+      display: block;
+      margin-top: 0.7rem;
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    .footer p {
+      max-width: 330px;
+      margin-top: 1.2rem;
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .footer-title {
+      display: block;
+      margin-bottom: 0.9rem;
+      color: rgba(255, 255, 255, 0.35);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.86rem;
+      font-weight: 300;
+      transition: color 180ms ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .copyright {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 3.5rem;
+      padding-top: 1.3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.36);
+      font-size: 12px;
+      font-weight: 300;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: rotate(2deg) translateY(0);
+      }
+      50% {
+        transform: rotate(2deg) translateY(-12px);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.35;
+        transform: scale(1.75);
+      }
+    }
+
+    @keyframes draw-down {
+      0% {
+        transform: scaleY(0);
+      }
+      45%, 70% {
+        transform: scaleY(1);
+      }
+      100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+      }
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --shell: min(100% - 28px, 700px);
+      }
+
+      .nav-inner {
+        min-height: 68px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 7.8rem 0 4.5rem;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-wrap {
+        display: none;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
+
+      .announcement-track {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .announcement-track::-webkit-scrollbar {
+        display: none;
+      }
+
+      .feature-grid,
+      .steps,
+      .testimonial-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card.wide {
+        grid-column: auto;
+      }
+
+      .how-header {
+        display: block;
+      }
+
+      .section-title,
+      .cta h2 {
+        font-size: clamp(2.35rem, 14vw, 3.6rem);
+      }
+
+      .hero h1 {
+        font-size: clamp(3.1rem, 16vw, 4.7rem);
+      }
+
+      .hero-actions,
+      .cta-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .copyright {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand-word {
+        font-size: 16px;
+      }
+
+      .logo-mark {
+        width: 38px;
+        height: 38px;
+      }
+
+      .social-proof {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .feature-card,
+      .testimonial-card {
+        padding: 1.45rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="The Muhsinat Club home">
+        <span class="logo-mark" aria-hidden="true">م</span>
+        <span class="brand-word">The Muhsinat Club</span>
+      </a>
+      <div class="nav-links">
+        <a href="#platform">Platform</a>
+        <a href="#how">How it works</a>
+        <a href="#stories">Stories</a>
+        <a href="#join" class="btn btn-teal">Join Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="pwa-badge reveal"><span class="pulse-dot" aria-hidden="true"></span>Now available as a PWA</div>
+          <h1 id="hero-title" class="reveal">Your home for <span class="text-gold">faith, sisterhood</span> <span class="growth">&amp; growth.</span></h1>
+          <p class="tagline reveal">Ajr Hunting for the Home in Jannah</p>
+          <p class="hero-body reveal">A refined digital sanctuary for Muslim women to learn, reflect, earn Jannah Coins, discover sister-led businesses, and build meaningful bonds across local chapters.</p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-gold" href="#join">Join the Club</a>
+            <a class="btn btn-ghost-light" href="#platform">Explore the app</a>
+          </div>
+          <div class="social-proof reveal">
+            <div class="avatars" aria-hidden="true">
+              <span class="avatar">ZA</span>
+              <span class="avatar">HU</span>
+              <span class="avatar">MK</span>
+              <span class="avatar">AA</span>
+            </div>
+            <span>Trusted by sisters creating intentional routines of worship, knowledge, and service.</span>
+          </div>
+        </div>
+
+        <div class="phone-wrap reveal" aria-label="App preview">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top">
+                <div>
+                  <div class="phone-kicker">As-salamu alaykum</div>
+                  <div class="phone-title">Welcome, Aisha</div>
+                </div>
+                <span class="phone-chip">TMC</span>
+              </div>
+              <div class="phone-stack">
+                <article class="phone-card">
+                  <span class="phone-label">Today's intention</span>
+                  <h3>Seek ajr quietly.</h3>
+                  <p>Log one act of worship, charity, or service and keep your heart connected to the akhirah.</p>
+                </article>
+                <article class="phone-card">
+                  <span class="phone-label">Halaqah</span>
+                  <h3>Purifying the heart</h3>
+                  <p>Saturday, 10:00 AM with the Abuja sisters circle.</p>
+                  <div class="phone-row"><span>12 seats left</span><span>RSVP</span></div>
+                </article>
+                <article class="phone-card coins">
+                  <div>
+                    <span class="phone-label">Jannah Coins</span>
+                    <h3>Grow with deeds</h3>
+                    <p>Redeem coins for resources, Souq perks, and member moments.</p>
+                    <span class="phone-pill">✦ 50 coins earned</span>
+                  </div>
+                  <div class="coin-count">50</div>
+                </article>
+                <article class="phone-card">
+                  <span class="phone-label">Chapter event</span>
+                  <h3>Sisters' Tea Majlis</h3>
+                  <p>Meet locally for reflection, dua, and warm conversation.</p>
+                  <span class="phone-pill teal">📍 Abuja Chapter</span>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <section class="announcement" aria-label="Platform highlights">
+      <div class="announcement-track">
+        <span>✦ Daily reflections</span>
+        <span>✦ Jannah Coins</span>
+        <span>✦ Private journal</span>
+        <span>✦ Member Souq</span>
+        <span>✦ City chapters</span>
+        <span>✦ Faith community</span>
+      </div>
+    </section>
+
+    <section class="features" id="platform" aria-labelledby="features-title">
+      <div class="shell">
+        <span class="section-label reveal">The Platform</span>
+        <h2 id="features-title" class="section-title reveal">Everything a sister needs, in one <span class="text-teal">sacred space.</span></h2>
+        <div class="feature-grid">
+          <article class="feature-card wide reveal">
+            <div class="feature-icon" aria-hidden="true">◈</div>
+            <h3>Halaqahs &amp; Events</h3>
+            <p>Find meaningful gatherings, reserve your seat, and stay connected to circles of knowledge in your city and online.</p>
+            <span class="feature-tag">RSVP enabled</span>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">✦</div>
+            <h3>Jannah Coins</h3>
+            <p>Turn daily acts of growth into a gentle rewards system that keeps intention, consistency, and service visible.</p>
+            <span class="feature-tag">Earn &amp; redeem</span>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">☾</div>
+            <h3>Private Journal</h3>
+            <p>Capture reflections, duas, lessons, and gratitude in a quiet space designed for sincerity and privacy.</p>
+            <span class="feature-tag">Fully private</span>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">✧</div>
+            <h3>The Souq</h3>
+            <p>Discover products, services, and offers from sister-led brands inside a trusted, values-aligned marketplace.</p>
+            <span class="feature-tag">Shop with sisters</span>
+          </article>
+          <article class="feature-card wide reveal">
+            <div class="feature-icon" aria-hidden="true">◇</div>
+            <h3>Resources Library</h3>
+            <p>Browse curated reminders, study notes, guides, and audio reflections that support practical spiritual growth.</p>
+            <span class="feature-tag">Curated content</span>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">م</div>
+            <h3>Legacy Card</h3>
+            <p>A beautifully simple member identity for exclusive access, recognition, and community privileges.</p>
+            <span class="feature-tag">Exclusive to members</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-title">
+      <div class="shell">
+        <div class="how-header">
+          <h2 id="how-title" class="section-title reveal">From sign-up to <span class="text-gold">sisterhood</span> in minutes.</h2>
+        </div>
+        <div class="steps">
+          <article class="step reveal">
+            <div class="step-number">01</div>
+            <div class="step-divider"></div>
+            <h3>Create your profile</h3>
+            <p>Join with your details, choose your city chapter, and set the intentions you want your community to support.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step-number">02</div>
+            <div class="step-divider"></div>
+            <h3>Enter your circle</h3>
+            <p>RSVP for halaqahs, save resources, write private reflections, and meet sisters walking a similar path.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step-number">03</div>
+            <div class="step-divider"></div>
+            <h3>Grow with ajr</h3>
+            <p>Earn Jannah Coins through beneficial actions and redeem them for thoughtful experiences inside the club.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="stories" aria-labelledby="testimonials-title">
+      <div class="shell">
+        <h2 id="testimonials-title" class="section-title reveal">Words from the <span class="text-teal">club.</span></h2>
+        <div class="testimonial-grid">
+          <article class="testimonial-card reveal">
+            <span class="quote-mark" aria-hidden="true">“</span>
+            <blockquote>The Muhsinat Club made my faith goals feel supported, beautiful, and possible in the middle of ordinary life.</blockquote>
+            <div class="author">
+              <span class="initials">ZA</span>
+              <div>
+                <div class="author-name">Zainab A.</div>
+                <div class="author-chapter">Lagos Chapter</div>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card reveal">
+            <span class="quote-mark" aria-hidden="true">“</span>
+            <blockquote>I came for reminders and stayed for sisterhood. The circles feel intentional, warm, and deeply grounding.</blockquote>
+            <div class="author">
+              <span class="initials">HU</span>
+              <div>
+                <div class="author-name">Hauwa U.</div>
+                <div class="author-chapter">Abuja Chapter</div>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card reveal">
+            <span class="quote-mark" aria-hidden="true">“</span>
+            <blockquote>The journal and Jannah Coins helped me notice small acts of khayr I used to overlook. It is gentle accountability.</blockquote>
+            <div class="author">
+              <span class="initials">MK</span>
+              <div>
+                <div class="author-name">Maryam K.</div>
+                <div class="author-chapter">Kaduna Chapter</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="join" aria-labelledby="cta-title">
+      <div class="shell">
+        <div class="cta-inner">
+          <span class="cta-eyebrow reveal">Ready, sister?</span>
+          <h2 id="cta-title" class="reveal">Your seat in the <span class="text-gold">sisterhood</span> is waiting.</h2>
+          <p class="reveal">Step into a premium faith community made for intentional Muslim women. Learn, reflect, attend, shop, and grow from one sacred digital home.</p>
+          <div class="cta-actions reveal">
+            <a class="btn btn-teal" href="mailto:hello@themuhsinatclub.com">Request Access</a>
+            <a class="btn btn-ghost-dark" href="#platform">View Features</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">The Muhsinat Club</div>
+          <span class="footer-tagline">Ajr Hunting for the Home in Jannah</span>
+          <p>A refined faith-based PWA for Muslim women building routines of worship, knowledge, sisterhood, and service.</p>
+        </div>
+        <div>
+          <span class="footer-title">Club</span>
+          <div class="footer-links">
+            <a href="#platform">Platform</a>
+            <a href="#how">How it works</a>
+            <a href="#stories">Stories</a>
+          </div>
+        </div>
+        <div>
+          <span class="footer-title">Community</span>
+          <div class="footer-links">
+            <a href="#join">Join now</a>
+            <a href="#platform">City chapters</a>
+            <a href="#platform">Member Souq</a>
+          </div>
+        </div>
+        <div>
+          <span class="footer-title">Contact</span>
+          <div class="footer-links">
+            <a href="mailto:hello@themuhsinatclub.com">Email us</a>
+            <a href="#join">Partnerships</a>
+            <a href="#top">Back to top</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <span>© <span id="year"></span> The Muhsinat Club. All rights reserved.</span>
+        <span>Built for faith, sisterhood, and growth.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector('.site-nav');
+    const revealItems = document.querySelectorAll('.reveal');
+    const year = document.getElementById('year');
+
+    year.textContent = new Date().getFullYear();
+
+    const updateNav = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 24);
+    };
+
+    updateNav();
+    window.addEventListener('scroll', updateNav, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.16,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    revealItems.forEach((item, index) => {
+      item.style.setProperty('--delay', `${index % 6 * 80}ms`);
+      observer.observe(item);
+    });
+  </script>
+</body>
+</html>
