@@ -6,7 +6,10 @@
 <title>The Muhsinat Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&amp;family=Dancing+Script:wght@400&amp;family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<!-- CHANGE 1: favicon -->
+<link rel="icon" type="image/png" href="images/img1.png">
+<link rel="apple-touch-icon" href="images/img1.png">
 <style>
 :root {
   --teal: #1A6B72;
@@ -79,6 +82,8 @@ button, a { cursor: pointer; }
 .site-nav.scrolled { backdrop-filter: blur(14px); background: rgba(250,248,243,.92); border-bottom: 1px solid rgba(200,168,75,.55); padding-block: .85rem; }
 .brand { align-items: center; display: flex; gap: .75rem; text-decoration: none; }
 .logo-mark { align-items: center; background: var(--teal); border: 1px solid rgba(200,168,75,.32); border-radius: 50%; color: var(--gold-lt); display: flex; font-size: 1.1rem; height: 40px; justify-content: center; line-height: 1; width: 40px; }
+/* CHANGE 2: nav logo image */
+.nav-logo-img { height: 38px; object-fit: contain; width: 38px; }
 .brand-name { color: var(--white); font-family: var(--display); font-size: 1.35rem; transition: color .35s ease; }
 .site-nav.scrolled .brand-name { color: var(--teal-dk); }
 .nav-right { align-items: center; display: flex; gap: 2.25rem; }
@@ -95,6 +100,9 @@ button, a { cursor: pointer; }
 .pattern-gold::before { animation: patternDrift 25s linear infinite; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23C8A84B' stroke-width='1' opacity='.14'%3E%3Cpath d='M60 8 112 60 60 112 8 60Z'/%3E%3Ccircle cx='60' cy='60' r='31'/%3E%3Cpath d='M60 29 91 60 60 91 29 60Z'/%3E%3Cpath d='M31 9 60 38 89 9M111 31 82 60 111 89M89 111 60 82 31 111M9 89 38 60 9 31'/%3E%3C/g%3E%3C/svg%3E"); }
 .pattern-teal::before { animation: patternDrift 25s linear infinite; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Cg fill='none' stroke='%231A6B72' stroke-width='1' opacity='.07'%3E%3Cpath d='M56 7 105 56 56 105 7 56Z'/%3E%3Ccircle cx='56' cy='56' r='29'/%3E%3Cpath d='M56 27 85 56 56 85 27 56Z'/%3E%3Cpath d='M28 7 56 35 84 7M105 28 77 56 105 84M84 105 56 77 28 105M7 84 35 56 7 28'/%3E%3C/g%3E%3C/svg%3E"); }
 @keyframes patternDrift { to { background-position: 120px 120px; } }
+
+/* CHANGE 5: features section img4 pattern overrides pattern-teal for this section only */
+.features::before { animation: patternDrift 40s linear infinite; background-image: url('images/img4.png'); background-repeat: repeat; background-size: 500px auto; content: ''; inset: 0; opacity: 0.4; pointer-events: none; position: absolute; z-index: 0; }
 
 .hero { display: grid; grid-template-columns: 60% 40%; min-height: 100vh; overflow: hidden; }
 .hero-left { align-items: center; background: var(--teal-hero); display: flex; min-height: 100vh; overflow: hidden; padding: 8rem clamp(1.5rem, 6vw, 6rem) 4.5rem; position: relative; }
@@ -215,7 +223,8 @@ button, a { cursor: pointer; }
 .footer { background: var(--ink); padding: 5.5rem clamp(1.5rem, 5vw, 5rem) 2rem; }
 .footer-inner { margin: 0 auto; max-width: 1200px; }
 .footer-top { border-bottom: 1px solid rgba(255,255,255,.07); display: grid; gap: 4rem; grid-template-columns: 1.55fr 1fr 1fr 1fr; padding-bottom: 3.8rem; }
-.footer-brand { color: var(--white); font-family: var(--display); font-size: 1.6rem; margin-bottom: .4rem; }
+.footer-brand-row { align-items: center; display: flex; gap: .75rem; margin-bottom: .4rem; }
+.footer-brand { color: var(--white); font-family: var(--display); font-size: 1.6rem; }
 .footer-tagline { color: var(--gold); font-family: var(--display); font-size: 1rem; font-style: italic; margin-bottom: .55rem; }
 .footer-arabic { color: rgba(200,168,75,.45); font-size: 1rem; margin-bottom: 1rem; }
 .footer-desc { color: rgba(255,255,255,.38); font-size: .85rem; font-weight: 300; line-height: 1.8; max-width: 270px; }
@@ -244,7 +253,7 @@ button, a { cursor: pointer; }
   .site-nav, .site-nav.scrolled { padding: .85rem 1.25rem; }
   .nav-links { display: none; }
   .brand-name { font-size: 1.15rem; }
-  .logo-mark { height: 36px; width: 36px; }
+  .nav-logo-img { height: 32px; width: 32px; }
   .nav-right { gap: .75rem; }
   .nav-cta { font-size: 11px; min-height: 38px; padding-inline: 16px; }
   .hero-left { min-height: 720px; padding-top: 7rem; }
@@ -299,7 +308,7 @@ button, a { cursor: pointer; }
 
 @media (max-width: 390px) {
   .site-nav, .site-nav.scrolled { padding-inline: 1rem; }
-  .logo-mark { height: 32px; width: 32px; }
+  .nav-logo-img { height: 28px; width: 28px; }
   .brand-name { font-size: .94rem; max-width: 142px; }
   .nav-cta { padding-inline: 10px; }
   .hero-left { padding-inline: 1rem; }
@@ -329,7 +338,8 @@ button, a { cursor: pointer; }
 
 <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
   <a class="brand" href="#top" aria-label="The Muhsinat Club home">
-    <span class="logo-mark ar">م</span>
+    <!-- CHANGE 2: real brand logo replacing generated circle -->
+    <img src="images/img1.png" alt="TMC" class="nav-logo-img">
     <span class="brand-name">The Muhsinat Club</span>
   </a>
   <div class="nav-right">
@@ -406,6 +416,7 @@ button, a { cursor: pointer; }
     </div>
   </section>
 
+  <!-- CHANGE 5: features section uses img4 via .features::before CSS override above -->
   <section class="section features pattern-teal" id="features">
     <div class="section-inner">
       <div class="fade-up">
@@ -497,17 +508,17 @@ button, a { cursor: pointer; }
       </div>
       <div class="testimonial-grid">
         <article class="testimonial">
-          <div class="quote-mark">&quot;</div>
+          <div class="quote-mark">"</div>
           <p class="quote">The journal feels like a quiet room for my thoughts. I come in for a few minutes and leave with my heart softer and my intentions clearer.</p>
           <div class="author"><span class="author-initials">A</span><div><p class="author-name">Amina K.</p><p class="author-location">United Kingdom</p></div></div>
         </article>
         <article class="testimonial">
-          <div class="quote-mark">&quot;</div>
+          <div class="quote-mark">"</div>
           <p class="quote">TMC makes faith feel beautifully practical. The halaqahs, reminders, and sisterly warmth helped me rebuild consistency without feeling alone.</p>
           <div class="author"><span class="author-initials">F</span><div><p class="author-name">Fatimah O.</p><p class="author-location">Nigeria</p></div></div>
         </article>
         <article class="testimonial">
-          <div class="quote-mark">&quot;</div>
+          <div class="quote-mark">"</div>
           <p class="quote">The Souq introduced me to women-led brands I now genuinely love. It feels good to support sisters while staying connected to the community.</p>
           <div class="author"><span class="author-initials">Z</span><div><p class="author-name">Zainab M.</p><p class="author-location">Canada</p></div></div>
         </article>
@@ -518,7 +529,7 @@ button, a { cursor: pointer; }
   <section class="section cta pattern-teal" id="join">
     <div class="cta-inner fade-up">
       <p class="cta-arabic ar">وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ</p>
-      <p class="cta-translation">&quot;And Allah loves those who do good.&quot; — Qur'an 3:134</p>
+      <p class="cta-translation">"And Allah loves those who do good." — Qur'an 3:134</p>
       <p class="cta-eyebrow">Ready, sister?</p>
       <h2 class="cta-heading">Your seat in the <em>sisterhood</em> is waiting.</h2>
       <p class="cta-body">Step into a warm, refined space for worship, learning, reflection, rewards, and sincere companionship built for Muslim women.</p>
@@ -534,7 +545,11 @@ button, a { cursor: pointer; }
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <p class="footer-brand">The Muhsinat Club</p>
+        <!-- CHANGE 4: img1 at 44px next to brand name (img2 has white bg, footer is dark) -->
+        <div class="footer-brand-row">
+          <img src="images/img1.png" alt="TMC" style="height:44px;object-fit:contain;">
+          <p class="footer-brand">The Muhsinat Club</p>
+        </div>
         <p class="footer-tagline">Ajr Hunting for the Home in Jannah</p>
         <p class="footer-arabic ar">المحسنات نادي</p>
         <p class="footer-desc">A premium faith-based community platform for Muslim women pursuing goodness, sisterhood, knowledge, and lasting reward.</p>
