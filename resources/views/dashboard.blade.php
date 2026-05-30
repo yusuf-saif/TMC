@@ -4,12 +4,7 @@
       $firstName = trim(explode(' ', $user->name ?? '')[0] ?? '');
       $memberSince = optional($user->approved_at ?? now())->format('F Y');
 
-      // Placeholder data
-      $reflection = [
-        'title' => 'The Beauty of Consistency',
-        'type' => 'Reflection',
-        'body' => 'A short reminder on istiqamah and the grace found in small, regular acts...',
-      ];
+      $todaysReflection = \App\Models\DailyReflection::forTodayOrLatest();
       $upcomingEvents = [
         ['title' => 'Weekly Halaqah', 'date' => now()->addDays(2)->format('D, M j'), 'tag' => 'Gathering'],
         ['title' => 'Night of Dhikr', 'date' => now()->addDays(5)->format('D, M j'), 'tag' => 'Remembrance'],
@@ -69,11 +64,22 @@
 
         <!-- Reflection of the Day -->
         <x-tmc.card title="Reflection of the Day" class="tmc-shadow">
-          @if($reflection)
-            <div class="space-y-1">
-              <p class="text-xs tmc-label uppercase text-slate-500">{{ $reflection['type'] }}</p>
-              <h3 class="text-lg font-semibold text-[var(--teal-dk)]">{{ $reflection['title'] }}</h3>
-              <p class="text-slate-600 text-sm leading-6">{{ $reflection['body'] }}</p>
+          @if($todaysReflection)
+            <div class="space-y-2">
+              <p class="text-xs tmc-label uppercase text-slate-500">
+                @switch($todaysReflection->type)
+                  @case('quran') {{ "Qur'an" }} @break
+                  @case('hadith') Hadith @break
+                  @default Reflection
+                @endswitch
+              </p>
+              <h3 class="text-lg font-semibold text-[var(--teal-dk)]">{{ $todaysReflection->title }}</h3>
+              <div class="prose max-w-none prose-sm sm:prose" style="color:#374151;">
+                {!! nl2br(e($todaysReflection->body)) !!}
+              </div>
+              @if($todaysReflection->source)
+                <p class="text-slate-500 text-sm">Source: {{ $todaysReflection->source }}</p>
+              @endif
             </div>
           @else
             <p class="text-slate-500 text-sm">No reflection available today. Check back soon, sister.</p>
