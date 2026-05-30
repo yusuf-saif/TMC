@@ -6,10 +6,7 @@
 
       $todaysReflection = \App\Models\DailyReflection::forTodayOrLatest();
       $upcomingEvents = \App\Models\Event::published()->upcoming()->limit(3)->get();
-      $announcement = [
-        'title' => 'TMC Ramadan Prep Series',
-        'body' => 'We are excited to share a series of gentle prompts and live sessions to help prepare hearts for Ramadan...'
-      ];
+      $announcement = \App\Models\Announcement::latestPublished();
     @endphp
 
     <x-slot name="header">
@@ -105,8 +102,9 @@
           <!-- Latest Announcement -->
           <x-tmc.card title="Latest Announcement" class="tmc-shadow">
             @if($announcement)
-              <h3 class="text-[var(--teal-dk)] font-semibold">{{ $announcement['title'] }}</h3>
-              <p class="mt-1 text-slate-600 text-sm leading-6">{{ $announcement['body'] }}</p>
+              <h3 class="text-[var(--teal-dk)] font-semibold">{{ $announcement->title }}</h3>
+              <p class="mt-1 text-slate-600 text-sm leading-6">{{ Str::limit(strip_tags($announcement->body), 200) }}</p>
+              <a href="{{ route('announcements.index') }}" class="inline-flex items-center gap-2 mt-3 px-3 py-2 rounded-md bg-[var(--gold)] text-[var(--teal-dk)] font-semibold hover:opacity-95">View All</a>
             @else
               <p class="text-slate-500 text-sm">No announcements right now.</p>
             @endif

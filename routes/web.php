@@ -19,6 +19,10 @@ Route::middleware(['auth','verified','approved'])->group(function(){
     Route::post('/events/{slug}/rsvp', [\App\Http\Controllers\RsvpController::class, 'store'])->name('events.rsvp');
     Route::post('/events/{slug}/cancel', [\App\Http\Controllers\RsvpController::class, 'cancel'])->name('events.rsvp.cancel');
     Route::get('/my-events', [\App\Http\Controllers\MyEventsController::class, 'index'])->name('events.mine');
+
+    // Announcements
+    Route::get('/announcements', [\App\Http\Controllers\AnnouncementsController::class, 'index'])->name('announcements.index');
+    Route::get('/announcements/{slug}', [\App\Http\Controllers\AnnouncementsController::class, 'show'])->name('announcements.show');
 });
 
 Route::view('/pending-approval', 'auth.pending-approval')->name('pending-approval');
