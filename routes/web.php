@@ -14,4 +14,8 @@ Route::view('profile', 'profile')
 
 Route::view('/pending-approval', 'auth.pending-approval')->name('pending-approval');
 
+Route::view('/member-card', 'members.card')
+    ->middleware(['auth','verified','approved'])
+    ->name('member-card');
+
 require __DIR__.'/auth.php';
