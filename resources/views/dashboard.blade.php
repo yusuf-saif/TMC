@@ -5,11 +5,7 @@
       $memberSince = optional($user->approved_at ?? now())->format('F Y');
 
       $todaysReflection = \App\Models\DailyReflection::forTodayOrLatest();
-      $upcomingEvents = [
-        ['title' => 'Weekly Halaqah', 'date' => now()->addDays(2)->format('D, M j'), 'tag' => 'Gathering'],
-        ['title' => 'Night of Dhikr', 'date' => now()->addDays(5)->format('D, M j'), 'tag' => 'Remembrance'],
-        ['title' => "Sisters' Circle", 'date' => now()->addDays(8)->format('D, M j'), 'tag' => 'Community'],
-      ];
+      $upcomingEvents = \App\Models\Event::published()->upcoming()->limit(3)->get();
       $announcement = [
         'title' => 'TMC Ramadan Prep Series',
         'body' => 'We are excited to share a series of gentle prompts and live sessions to help prepare hearts for Ramadan...'
@@ -89,15 +85,15 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <!-- Upcoming Events -->
           <x-tmc.card title="Upcoming Events" class="tmc-shadow lg:col-span-2">
-            @if(!empty($upcomingEvents))
+            @if($upcomingEvents->isNotEmpty())
               <ul class="divide-y divide-slate-200/70">
                 @foreach($upcomingEvents as $event)
                   <li class="py-3 flex items-center justify-between">
                     <div>
-                      <p class="text-[var(--teal-dk)] font-medium">{{ $event['title'] }}</p>
-                      <p class="text-xs text-slate-500 tmc-label uppercase">{{ $event['tag'] }}</p>
+                      <p class="text-[var(--teal-dk)] font-medium">{{ $event->title }}</p>
+                      <p class="text-xs text-slate-500 tmc-label uppercase">{{ $event->event_date->format('D, M j, g:ia') }}</p>
                     </div>
-                    <span class="inline-flex items-center px-3 py-1 rounded-md bg-[var(--ivory)] border border-slate-200 text-[var(--teal)] text-sm font-semibold">{{ $event['date'] }}</span>
+                    <a href="{{ route('events.show',$event->slug) }}" class="inline-flex items-center px-3 py-1 rounded-md bg-[var(--ivory)] border border-slate-200 text-[var(--teal)] text-sm font-semibold">Details</a>
                   </li>
                 @endforeach
               </ul>

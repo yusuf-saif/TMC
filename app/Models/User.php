@@ -62,6 +62,11 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         return $this->hasOne(UserProfile::class);
     }
 
+    public function eventRsvps()
+    {
+        return $this->hasMany(EventRsvp::class);
+    }
+
     public function isApproved(): bool
     {
         return $this->status === 'approved';
