@@ -3,7 +3,12 @@
 use Illuminate\Support\Str;
 
 // Prefer the namespaced MySQL PDO attribute constant on PHP >= 8.5 to avoid deprecation warnings
-$mysqlSslAttr = defined('\\Pdo\\Mysql::ATTR_SSL_CA') ? \Pdo\Mysql::ATTR_SSL_CA : (defined('PDO::MYSQL_ATTR_SSL_CA') ? \PDO::MYSQL_ATTR_SSL_CA : null);
+$mysqlSslAttr = null;
+if (defined('Pdo\\Mysql::ATTR_SSL_CA')) {
+    $mysqlSslAttr = constant('Pdo\\Mysql::ATTR_SSL_CA');
+} elseif (defined('PDO::MYSQL_ATTR_SSL_CA')) {
+    $mysqlSslAttr = constant('PDO::MYSQL_ATTR_SSL_CA');
+}
 
 return [
 

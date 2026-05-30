@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->brandName('The Muhsinat Club')
+            ->authGuard('web')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
@@ -51,7 +52,6 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                \App\Http\Middleware\EnsureUserIsAdmin::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

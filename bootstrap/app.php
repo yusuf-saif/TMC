@@ -4,10 +4,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
-// Temporary workaround for PHP 8.5 deprecation notices from vendor config:
+// Suppress CLI deprecation notices from vendor config on PHP >= 8.5
 if (PHP_SAPI === 'cli' && PHP_VERSION_ID >= 80500) {
     error_reporting(E_ALL & ~E_DEPRECATED);
 }
+
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -23,4 +24,8 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    })
+    ->withCommands([
+        \App\Console\Commands\TmcCreateAdmin::class,
+    ])
+    ->create();

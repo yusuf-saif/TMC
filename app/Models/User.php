@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -63,5 +65,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isApproved(): bool
     {
         return $this->status === 'approved';
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return (bool) ($this->is_admin && $this->email_verified_at && $this->status === 'approved');
     }
 }
