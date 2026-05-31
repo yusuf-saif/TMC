@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-member-layout>
     @php
       $user = Auth::user();
       $firstName = trim(explode(' ', $user->name ?? '')[0] ?? '');
@@ -130,4 +130,4 @@
         </x-tmc.card>
       </div>
     </div>
-</x-app-layout>
+</x-member-layout>

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-member-layout>
   <div class="max-w-3xl mx-auto px-4 py-6 space-y-6">
     <x-tmc.page-header title="Announcements" />
 
@@ -20,4 +20,4 @@
       <div class="mt-6">{{ $announcements->links() }}</div>
     @endif
   </div>
-</x-app-layout>
+</x-member-layout>

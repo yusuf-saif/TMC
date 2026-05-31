@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-member-layout>
   <div class="max-w-3xl mx-auto px-4 py-6 space-y-6">
     <a href="{{ route('events.index') }}" class="text-[var(--teal)] hover:text-[var(--gold)] font-semibold">← Back to Events</a>
 
@@ -48,4 +48,4 @@
       @endif
     </div>
   </div>
-</x-app-layout>
+</x-member-layout>

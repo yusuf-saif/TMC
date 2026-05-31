@@ -1,65 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Legacy Member Card - The Muhsinat Club</title>
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <style>
-    :root{
-      --teal:#1A6B72; --teal-dk:#0D3F44; --ivory:#FAF8F3; --gold:#C8A84B; --gold-lt:#E8CB7A;
-    }
-    .tmc-card{ background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dk) 100%); }
-    .tmc-frame{ background: var(--ivory); box-shadow: 0 25px 60px rgba(26,107,114,.18); }
-    .tmc-accent{ background: linear-gradient(90deg, var(--gold), var(--gold-lt)); height: 4px; }
-    .tmc-label{ letter-spacing:.2em; }
-  </style>
-</head>
-<body class="bg-[var(--ivory)] text-slate-800">
-  <div class="min-h-screen flex flex-col items-center gap-6 px-4 py-8">
-    <div class="w-full max-w-xl">
-      <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 text-[var(--teal)] hover:text-[var(--gold)] font-semibold">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m15 18-6-6 6-6"/></svg>
-        Back to Dashboard
-      </a>
-    </div>
+<x-member-layout>
+  <div class="max-w-xl mx-auto">
+    <x-tmc.page-header title="Membership Card" />
 
-    <div id="card-wrap" class="w-full max-w-xl">
-      <div id="member-card" class="tmc-frame rounded-xl overflow-hidden">
-        <div class="tmc-card p-6 sm:p-8">
+    <div id="card-wrap" class="w-full">
+      <div id="member-card" class="rounded-xl overflow-hidden" style="background:var(--ivory); box-shadow:0 25px 60px rgba(26,107,114,.18)">
+        <div class="p-6 sm:p-8" style="background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dk) 100%);">
           <div class="flex items-center gap-3">
             <img src="/images/img1.png" alt="TMC" class="w-10 h-10 object-contain"/>
             <div>
-              <p class="text-white/80 text-xs tmc-label uppercase">The Muhsinat Club</p>
+              <p class="text-white/80 text-xs uppercase tracking-[.2em]">The Muhsinat Club</p>
               <h1 class="text-white text-2xl sm:text-3xl font-semibold leading-tight">Legacy Member</h1>
             </div>
           </div>
 
           <div class="mt-6 grid grid-cols-1 gap-4 text-[var(--ivory)]/95">
             <div>
-              <p class="text-xs tmc-label uppercase text-white/70">Name</p>
+              <p class="text-xs uppercase tracking-[.2em] text-white/70">Name</p>
               <p class="text-lg sm:text-xl font-medium">{{ Auth::user()->name }}</p>
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <p class="text-xs tmc-label uppercase text-white/70">Membership No.</p>
+                <p class="text-xs uppercase tracking-[.2em] text-white/70">Membership No.</p>
                 <p class="text-lg sm:text-xl font-medium tracking-wider">{{ Auth::user()->membership_number ?? '—' }}</p>
               </div>
               <div>
-                <p class="text-xs tmc-label uppercase text-white/70">Member Since</p>
+                <p class="text-xs uppercase tracking-[.2em] text-white/70">Member Since</p>
                 <p class="text-lg sm:text-xl font-medium">{{ optional(Auth::user()->approved_at ?? now())->format('F Y') }}</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="tmc-accent"></div>
+        <div style="background: linear-gradient(90deg, var(--gold), var(--gold-lt)); height:4px;"></div>
         <div class="p-4 sm:p-6 bg-white">
           <p class="text-slate-600 text-sm">This digital card recognizes your legacy membership in The Muhsinat Club.</p>
         </div>
       </div>
     </div>
 
-    <div class="w-full max-w-xl flex flex-col sm:flex-row gap-3 justify-center">
+    <div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
       <button id="shareBtn" class="inline-flex justify-center items-center gap-2 px-4 py-3 rounded-md bg-[var(--gold)] text-[var(--teal-dk)] font-semibold hover:opacity-95">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="m16 6-4-4-4 4"/><path d="M12 2v14"/></svg>
         Share
@@ -105,5 +83,4 @@
       document.body.appendChild(a); a.click(); a.remove();
     });
   </script>
-</body>
-</html>
+</x-member-layout>

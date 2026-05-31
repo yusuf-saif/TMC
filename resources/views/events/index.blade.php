@@ -1,11 +1,11 @@
-<x-app-layout>
+<x-member-layout>
   <div class="max-w-5xl mx-auto px-4 py-6 space-y-8">
     <x-tmc.page-header title="Events" />
 
     <section>
       <h2 class="text-sm uppercase tracking-wider text-slate-500">Upcoming Events</h2>
       @if($upcoming->isEmpty())
-        <p class="mt-2 text-slate-600">No upcoming events yet.</p>
+        <x-tmc.empty-state title="No upcoming events" body="Check back soon for new gatherings." class="mt-2" />
       @else
         <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
           @foreach($upcoming as $e)
@@ -24,7 +24,7 @@
     <section>
       <h2 class="text-sm uppercase tracking-wider text-slate-500">Past Events</h2>
       @if($past->isEmpty())
-        <p class="mt-2 text-slate-600">No past events.</p>
+        <x-tmc.empty-state title="No past events" class="mt-2" />
       @else
         <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
           @foreach($past as $e)
@@ -37,4 +37,4 @@
       @endif
     </section>
   </div>
-</x-app-layout>
+</x-member-layout>
