@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ $event->title }} — The Muhsinat Club</title>
-  @vite(['resources/css/app.css','resources/js/app.js'])
-  <style>:root{--teal:#1A6B72;--teal-dk:#0D3F44;--ivory:#FAF8F3;--gold:#C8A84B;--gold-lt:#E8CB7A}</style>
-</head>
-<body class="bg-[var(--ivory)] text-slate-800">
+<x-app-layout>
   <div class="max-w-3xl mx-auto px-4 py-6 space-y-6">
     <a href="{{ route('events.index') }}" class="text-[var(--teal)] hover:text-[var(--gold)] font-semibold">← Back to Events</a>
 
@@ -33,17 +24,17 @@
         @if($userRsvp && $userRsvp->status === 'registered')
           <form method="POST" action="{{ route('events.rsvp.cancel',$event->slug) }}" class="inline-block">
             @csrf
-            <button class="px-4 py-2 rounded-md bg-slate-100 border hover:bg-slate-200">Cancel RSVP</button>
+            <x-tmc.button variant="secondary">Cancel RSVP</x-tmc.button>
           </form>
         @else
           @if($event->status === 'cancelled')
-            <span class="px-3 py-1 rounded bg-red-100 text-red-700 font-semibold">Cancelled</span>
+            <x-tmc.badge color="gray">Cancelled</x-tmc.badge>
           @elseif($event->isFull())
-            <span class="px-3 py-1 rounded bg-slate-100 text-slate-700 font-semibold">Full</span>
+            <x-tmc.badge color="gray">Full</x-tmc.badge>
           @else
             <form method="POST" action="{{ route('events.rsvp',$event->slug) }}" class="inline-block">
               @csrf
-              <button class="px-4 py-2 rounded-md bg-[var(--gold)] text-[var(--teal-dk)] font-semibold hover:opacity-95">RSVP</button>
+              <x-tmc.button>RSVP</x-tmc.button>
             </form>
           @endif
         @endif
@@ -57,5 +48,4 @@
       @endif
     </div>
   </div>
-</body>
-</html>
+</x-app-layout>

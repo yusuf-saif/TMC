@@ -67,12 +67,16 @@ class EventResource extends Resource
                 ]),
             ])
             ->actions([
-                Tables\Actions\Action::make('publish')->visible(fn($r) => $r->status !== 'published')->color('success')
+                Tables\Actions\Action::make('publish')
+                    ->visible(fn(Event $record): bool => $record->status !== 'published')
+                    ->color('success')
                     ->action(fn($record) => app(\App\Services\EventService::class)->publish($record, auth()->user())),
-                Tables\Actions\Action::make('cancel')->visible(fn($r) => $r->status !== 'cancelled')
+                Tables\Actions\Action::make('cancel')
+                    ->visible(fn(Event $record): bool => $record->status !== 'cancelled')
                     ->requiresConfirmation()->color('danger')
                     ->action(fn($record) => app(\App\Services\EventService::class)->cancel($record, auth()->user())),
-                Tables\Actions\Action::make('complete')->visible(fn($r) => $r->status !== 'completed')
+                Tables\Actions\Action::make('complete')
+                    ->visible(fn(Event $record): bool => $record->status !== 'completed')
                     ->color('secondary')
                     ->action(fn($record) => app(\App\Services\EventService::class)->complete($record, auth()->user())),
                 Tables\Actions\Action::make('exportCsv')->label('Export RSVPs CSV')->icon('heroicon-o-arrow-down-tray')

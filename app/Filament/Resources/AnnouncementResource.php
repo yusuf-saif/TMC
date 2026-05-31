@@ -63,10 +63,12 @@ class AnnouncementResource extends Resource
                 ]),
             ])
             ->actions([
-                Tables\Actions\Action::make('publishNow')->label('Publish Now')->visible(fn($r)=>$r->status!=='published')
+                Tables\Actions\Action::make('publishNow')->label('Publish Now')
+                    ->visible(fn(Announcement $record): bool => $record->status !== 'published')
                     ->color('success')
                     ->action(fn($record)=>app(\App\Services\AnnouncementService::class)->publishNow($record, auth()->user())),
-                Tables\Actions\Action::make('archive')->visible(fn($r)=>$r->status!=='archived')
+                Tables\Actions\Action::make('archive')
+                    ->visible(fn(Announcement $record): bool => $record->status !== 'archived')
                     ->color('gray')->requiresConfirmation()
                     ->action(fn($record)=>app(\App\Services\AnnouncementService::class)->archive($record, auth()->user())),
                 Tables\Actions\EditAction::make(),

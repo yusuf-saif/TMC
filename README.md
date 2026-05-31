@@ -61,6 +61,56 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## Local Development (TMC)
+
+This app is configured for SQLite locally.
+
+1. Ensure database file exists:
+
+```
+touch database/database.sqlite
+```
+
+2. Clear caches & migrate:
+
+```
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+php artisan migrate:fresh
+```
+
+3. Seed local users:
+
+```
+php artisan tmc:local-seed
+```
+
+Credentials:
+
+```
+Admin:   admin@tmcng.com / Password1
+Member:  member@tmcng.com / Password1
+Pending: pending@tmcng.com / Password1
+```
+
+Admin Panel: /admin
+
+Main Pages:
+
+```
+/               Landing
+/register       Registration
+/login          Login
+/pending-approval
+/dashboard      Approved members
+/member-card    Legacy card
+/events         Approved members
+/my-events      RSVPs
+/announcements  Approved members
+```
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

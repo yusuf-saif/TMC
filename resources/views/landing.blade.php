@@ -348,7 +348,7 @@ button, a { cursor: pointer; }
       <li><a href="#community">Sisterhood</a></li>
       <li><a href="#about">About</a></li>
     </ul>
-    <a class="btn btn-gold nav-cta" href="#join">Join Now</a>
+    <a class="btn btn-gold nav-cta" href="/register">Join Now</a>
   </div>
 </nav>
 
@@ -365,7 +365,7 @@ button, a { cursor: pointer; }
         <p class="hero-tagline">Ajr Hunting for the Home in Jannah</p>
         <p class="hero-body">A refined community platform for Muslim women seeking sacred routines, sincere companionship, and beautiful tools for worship, reflection, learning, and service.</p>
         <div class="hero-actions">
-          <a class="btn btn-gold" href="#join">Join the Club</a>
+          <a class="btn btn-gold" href="/register">Join the Club</a>
           <a class="btn btn-ghost" href="#features">Explore the platform</a>
         </div>
       </div>
@@ -534,7 +534,7 @@ button, a { cursor: pointer; }
       <h2 class="cta-heading">Your seat in the <em>sisterhood</em> is waiting.</h2>
       <p class="cta-body">Step into a warm, refined space for worship, learning, reflection, rewards, and sincere companionship built for Muslim women.</p>
       <div class="cta-actions">
-        <a class="btn btn-gold" href="#top">Create Your Account</a>
+        <a class="btn btn-gold" href="/register">Create Your Account</a>
         <a class="btn btn-outline" href="#features">See the platform</a>
       </div>
     </div>
@@ -585,6 +585,8 @@ button, a { cursor: pointer; }
     <div class="footer-bottom">
       <p>© <span id="year"></span> The Muhsinat Club. All rights reserved.</p>
       <div>
+        <a href="/login">Login</a>
+        <a href="/admin">Admin</a>
         <a href="#about">Privacy</a>
         <a href="#about">Terms</a>
       </div>

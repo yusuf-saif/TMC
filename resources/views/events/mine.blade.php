@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Events — The Muhsinat Club</title>
-  @vite(['resources/css/app.css','resources/js/app.js'])
-  <style>:root{--teal:#1A6B72;--teal-dk:#0D3F44;--ivory:#FAF8F3;--gold:#C8A84B;--gold-lt:#E8CB7A}</style>
-</head>
-<body class="bg-[var(--ivory)] text-slate-800">
+<x-app-layout>
   <div class="max-w-5xl mx-auto px-4 py-6 space-y-8">
     <div class="flex items-center justify-between">
       <h1 class="text-2xl font-semibold text-[var(--teal-dk)]">My Events</h1>
@@ -46,5 +37,4 @@
       @endif
     </section>
   </div>
-</body>
-</html>
+</x-app-layout>

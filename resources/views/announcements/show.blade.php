@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ $announcement->title }} — The Muhsinat Club</title>
-  @vite(['resources/css/app.css','resources/js/app.js'])
-  <style>:root{--teal:#1A6B72;--teal-dk:#0D3F44;--ivory:#FAF8F3;--gold:#C8A84B;--gold-lt:#E8CB7A}</style>
-</head>
-<body class="bg-[var(--ivory)] text-slate-800">
+<x-app-layout>
   <div class="max-w-3xl mx-auto px-4 py-6 space-y-6">
     <a href="{{ route('announcements.index') }}" class="text-[var(--teal)] hover:text-[var(--gold)] font-semibold">← Back to Announcements</a>
 
@@ -19,5 +10,4 @@
       <div class="prose max-w-none">{!! $announcement->body !!}</div>
     </div>
   </div>
-</body>
-</html>
+</x-app-layout>
